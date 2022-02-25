@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/instructors',[instructorController::class,'list']);
 Route::post('/register', [instructorController::class, 'register']);
+Route::post('/upload/{id}',[instructorController::class,'saveimg']);

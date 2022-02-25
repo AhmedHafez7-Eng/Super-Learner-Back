@@ -20,7 +20,7 @@ class instructorController extends Controller
             $img=$ss->profile_pic;
             $url=asset('instructorImg/'.$img);
             //array_push($urls,$url);
-            $ss->img_name=$url;
+            $ss->profile_pic=$url;
         }
             
             return response()->json($instructor );  // in json format
@@ -42,7 +42,7 @@ class instructorController extends Controller
                   'fname' => $validatedData['fname'],
                   'lname' => $validatedData['lname'],
                        'email' => $validatedData['email'],
-                       'b_date'=>'2020-10-11',
+                       'b_date'=>$request->b_date,
                        'phone'=>$request->phone,
                        'address'=>$request->address,
                        'password' => Hash::make($validatedData['password']),
@@ -54,6 +54,16 @@ class instructorController extends Controller
                   'access_token' => $token,
                        'token_type' => 'Bearer',
     ]);
+    }
+    public function saveimg(Request $request,$id){
+        $instructor= User::find($id);
+        $image = $request->profile_pic;
+        $imageName = time() . '.' . $image->getClientoriginalExtension();
+        $request->profile_pic->move('instructorImg', $imageName);
+       $instructor->profile_pic=$imageName;
+       $instructor->save();
+        return response()->json( 'saved changes');
+       
     }
 
 }
