@@ -52,6 +52,7 @@ class instructorController extends Controller
              'b_date'=>$request->b_date,
              'phone'=>$request->phone,
              'address'=>$request->address,
+             'role'=>$request->role,
              'password' => Hash::make($validatedData['password']),
             // 'profile_pic'=>$newName,
  ]);
@@ -79,8 +80,8 @@ class instructorController extends Controller
     }
     public function getone($id){
         $instructor = User::findOrFail($id);
-
-return response()->json($instructor);
+        
+return response()->json($instructor->courseofinstructor[0]);
     }
     public function getimageof($id){
         $instructor=User::find($id);
