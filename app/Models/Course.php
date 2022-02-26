@@ -9,6 +9,12 @@ use App\Models\User;
 class Course extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'title',
+        'max_score',
+        'desc',
+        
+    ];
 
     public function InstructorOfCourse()
     {
