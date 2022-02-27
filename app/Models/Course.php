@@ -18,6 +18,6 @@ class Course extends Model
 
     public function InstructorOfCourse()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'instructor_id', 'id');
     }
 }
