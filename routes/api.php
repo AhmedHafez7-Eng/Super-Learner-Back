@@ -25,5 +25,7 @@ Route::post('/register', [instructorController::class, 'register']);
 Route::post('/upload/{id}',[instructorController::class,'saveimg']);
 Route::get('/courseinfo/{id}',[instructorController::class,'getone']);
 Route::get('/getimage/{id}',[instructorController::class,'getimageof']);
+Route::get('/delete/{id}', [instructorController::class, 'delete']);
+Route::post('/uploadimg/{id}',[instructorController::class,'saveimgcourse']);
 /////////////////////////////////////////////////////////////
 Route::get('/courses',[coursesController::class,'listCourse']);

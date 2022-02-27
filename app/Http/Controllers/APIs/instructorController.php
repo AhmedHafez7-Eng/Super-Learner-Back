@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Course;
 
 class instructorController extends Controller
 {
@@ -81,7 +82,7 @@ class instructorController extends Controller
     public function getone($id){
         $instructor = User::findOrFail($id);
         
-return response()->json($instructor->courseofinstructor[0]);
+return response()->json($instructor);
     }
     public function getimageof($id){
         $instructor=User::find($id);
@@ -90,5 +91,33 @@ return response()->json($instructor->courseofinstructor[0]);
         $url=asset('instructorImg/'.$images);
        return response()->json($url);
     }
+    public function delete( $id)
+{
+    
+    $instructor = User::findOrFail($id);
+    $course= $instructor->courseofinstructor;
+   $link='instructorImg/'.$instructor->profile_pic;
+   
+
+     if(File::exists($link))
+        File::delete($link);
+        $course[0]->delete();
+        return response()->json($course[0]);
+       // $instructors = Category::all();
+    
+   
+}
+public function saveimgcourse(Request $request,$id){
+    $instructor= User::find($id);
+    
+    $image = $request->course_img;
+    $imageName = time() . '.' . $image->getClientoriginalExtension();
+    $request->course_img->move('courseImg', $imageName);
+  $course= $instructor->courseofinstructor;
+ $course[0]->course_img=$imageName;
+   $course[0]->save();
+    return response()->json( 'saved changes');
+   
+}
 
 }
