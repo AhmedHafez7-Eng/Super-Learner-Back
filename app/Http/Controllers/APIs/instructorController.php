@@ -80,7 +80,7 @@ class instructorController extends Controller
        
     }
     public function getone($id){
-        $course = User::findOrFail($id)->courseofinstructor;
+        $course = User::findOrFail($id);
        // $instructor=$course->InstructorOfCourse;
 return response()->json($course);
     }
