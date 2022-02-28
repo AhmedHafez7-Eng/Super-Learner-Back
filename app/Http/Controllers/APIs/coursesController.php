@@ -11,7 +11,32 @@ class coursesController extends Controller
     //
     public function listCourse(){
         $courses=Course::all();
-        //$instructors=$courses[0]->InstructorOfCourse;
+        foreach( $courses as $ss){
+            $img=$ss->course_img;
+            $url=asset('courseImg/'.$img);
+            //array_push($urls,$url);
+            $ss->course_img=$url;
+        }
         return response()->json($courses);
     }
+    public function saveimgcourse(Request $request,$id){
+        $course= Course::find($id);
+        $image = $request->course_img;
+        $imageName = time() . '.' . $image->getClientoriginalExtension();
+        $request->course_img->move('courseImg', $imageName);
+       $course->course_img=$imageName;
+       $course->save();
+        return response()->json( 'saved changes');
+       
+    }
+    public function update(Request $request,$id){
+        $course = Course::findOrFail($id);
+        if($course)
+            {
+                
+                $course-> title=  $request->title;
+                $course->save(); 
+                return response()->json( 'your item has updated');
+    
+            }}
 }
