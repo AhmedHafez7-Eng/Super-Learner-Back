@@ -39,4 +39,9 @@ class coursesController extends Controller
                 return response()->json( 'your item has updated');
     
             }}
+            public function getCourse($id){
+                $course=Course::find($id);
+               
+                return response($course);
+            }
 }

@@ -32,3 +32,4 @@ Route::get('/delete/{id}', [instructorController::class, 'delete']);
 Route::get('/courses',[coursesController::class,'listCourse']);
 Route::post('/uploadimg/{id}',[coursesController::class,'saveimgcourse']);
 Route::post('/update/{id}', [coursesController::class, 'update']);
+Route::get('/course/{id}',[coursesController::class,'getCourse']);
