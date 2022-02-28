@@ -17,14 +17,19 @@ class instructorController extends Controller
         //$user=auth()->user();
         //if ($user->tokenCan('all:list')) {
         $instructor = User::all();
+        $courses=[];
         foreach( $instructor as $ss){
             $img=$ss->profile_pic;
             $url=asset('instructorImg/'.$img);
             //array_push($urls,$url);
             $ss->profile_pic=$url;
+            array_push( $courses,$ss->courseofinstructor);
         }
             
-            return response()->json($instructor );  // in json format
+            return response()->json(
+              ['instructors'=>  $instructor,
+              'coursesofinstructors'=>$courses] 
+            );  // in json format
         
    // }
         
