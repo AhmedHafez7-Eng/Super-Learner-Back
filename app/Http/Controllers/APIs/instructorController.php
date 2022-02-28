@@ -20,7 +20,7 @@ class instructorController extends Controller
         $instructor = User::all()->where('role', 'instructor');
         foreach ($instructor as $ss) {
             $img = $ss->profile_pic;
-            $url = asset('instructorImg/' . $img);
+            $url = asset('userImg/' . $img);
             //array_push($urls,$url);
             $ss->profile_pic = $url;
         }

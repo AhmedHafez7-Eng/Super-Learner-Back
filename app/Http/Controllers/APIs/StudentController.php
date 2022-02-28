@@ -23,7 +23,7 @@ class StudentController extends Controller
         $students = User::all()->where('role', 'student');
         foreach ($students as $student) {
             $img = $student->profile_pic;
-            $url = asset('studentImg/' . $img);
+            $url = asset('userImg/' . $img);
             $student->profile_pic = $url;
         }
 
@@ -51,14 +51,14 @@ class StudentController extends Controller
     {
         $student = User::find($id);
 
-        if ($student->role == 'student') {
-            $img = $student->profile_pic;
-            $url = asset('studentImg/' . $img);
-            $student->profile_pic = $url;
-
-            return response()->json($student, 200);
+        if (is_null($student)) {
+            return response()->json(['message' => 'No Student Found With This ID To Show'], 404);
         }
-        return response()->json(['message' => 'This is not a Student'], 404);
+        $img = $student->profile_pic;
+        $url = asset('userImg/' . $img);
+        $student->profile_pic = $url;
+
+        return response()->json($student, 200);
     }
 
     /**
@@ -85,6 +85,7 @@ class StudentController extends Controller
             'password' => 'string|min:8',
             'phone' => 'numeric|digits:11',
             'address' => 'string|max:255',
+            'profile_pic' => 'mimes:jpg,png,jpeg',
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -95,7 +96,7 @@ class StudentController extends Controller
             $student->update($request->all());
 
             $img = $student->profile_pic;
-            $url = asset('studentImg/' . $img);
+            $url = asset('userImg/' . $img);
             $student->profile_pic = $url;
             return response()->json($student, 200);
         } catch (\Illuminate\Database\QueryException $e) {

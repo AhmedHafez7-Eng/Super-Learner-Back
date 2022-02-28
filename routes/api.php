@@ -40,9 +40,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 // ------ Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/students', [StudentController::class, 'index']);
-    Route::get('/student/{id}', [StudentController::class, 'show']);
-    Route::put('/student/{id}', [StudentController::class, 'update']);
-    Route::delete('/student/{id}', [StudentController::class, 'destroy']);
+    Route::get('/students/{id}', [StudentController::class, 'show']);
+    Route::put('/students/{id}', [StudentController::class, 'update']);
+    Route::delete('/students/{id}', [StudentController::class, 'destroy']);
+
+    // Route::apiResource('students', StudentController::class);
 });
 
 
