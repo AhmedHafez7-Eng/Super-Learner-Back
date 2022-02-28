@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIs\AuthController;
 use App\Http\Controllers\APIs\instructorController;
+use App\Http\Controllers\APIs\TestsController;
+use App\Http\Controllers\APIs\TestDetailsController;
 use App\Http\Controllers\APIs\coursesController;
 use App\Http\Controllers\APIs\StudentController;
 use App\Models\User;
@@ -48,10 +50,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 
-
-
-
-
 // ====================== Instructor Routes
 
 Route::get('/instructors', [instructorController::class, 'list']);
@@ -67,13 +65,20 @@ Route::get('/courses', [coursesController::class, 'listCourse']);
 
 
 
+// =========================================tests routes========================================================
 
+Route::get('/tests',[TestsController::class,'index']);
+Route::get('/tests/{id}',[TestsController::class,'show']);
+Route::post('/tests',[TestsController::class,'create']);
+Route::put('/tests/{id}', [TestsController::class, 'update']);
+Route::delete('/tests/{id}', [TestsController::class, 'delete']);
+// ========================================= testsDetails routes========================================================
 
-
-
-
-
-
+Route::get('/testsdetails',[TestDetailsController::class,'index']);
+Route::get('/testsdetails/{id}',[TestDetailsController::class,'show']);
+Route::post('/testsdetails',[TestDetailsController::class,'create']);
+Route::put('/testsdetails/{id}', [TestDetailsController::class, 'update']);
+Route::delete('/testsdetails/{id}', [TestDetailsController::class, 'delete']);
 
 
 
