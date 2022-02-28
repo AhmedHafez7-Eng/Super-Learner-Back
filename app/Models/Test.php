@@ -9,6 +9,7 @@ use App\Models\Course;
 class Test extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     public function CourseOfTest()
     {
