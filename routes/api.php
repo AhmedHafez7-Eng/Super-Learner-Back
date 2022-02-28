@@ -61,9 +61,9 @@ Route::post('/uploadimg/{id}', [instructorController::class, 'saveimgcourse']);
 
 
 // ====================== Courses Routes
-Route::get('/courses', [coursesController::class, 'listCourse']);
-
-
+Route::get('/courses',[coursesController::class,'listCourse']);
+Route::post('/uploadimg/{id}',[coursesController::class,'saveimgcourse']);
+Route::post('/update/{id}', [coursesController::class, 'update']);
 
 // =========================================tests routes========================================================
 
@@ -85,3 +85,4 @@ Route::delete('/testsdetails/{id}', [TestDetailsController::class, 'delete']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
