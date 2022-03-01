@@ -19,6 +19,7 @@ class coursesController extends Controller
         }
         return response()->json($courses);
     }
+    /////////////////////////////////////////////////
     public function saveimgcourse(Request $request,$id){
         $course= Course::find($id);
         $image = $request->course_img;
@@ -29,6 +30,7 @@ class coursesController extends Controller
         return response()->json( 'saved changes');
        
     }
+    ////////////////////////////////////////////////////////
     public function update(Request $request,$id){
         $course = Course::findOrFail($id);
         if($course)
@@ -39,6 +41,7 @@ class coursesController extends Controller
                 return response()->json( 'your item has updated');
     
             }}
+            /////////////////////////////////////////////////
             public function getCourse($id){
                 $course=Course::find($id);
                
