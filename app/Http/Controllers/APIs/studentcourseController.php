@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\APIs;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\studentCourse\Store;
 use App\Http\Resources\StudentCourseResource;
 use Illuminate\Http\Request;
 use App\Models\StudentCourse;
@@ -27,13 +28,36 @@ class studentcourseController extends Controller
     }
     public function update(Request $request,$id)
     {
-        $studentcourse = StudentCourse::with('StudentInstance','CourseInstance')->find($id);
+        $studentcourse = StudentCourse::with('StudentInstance','CourseInstance')->where('student_id', $id)->first();
         if ($studentcourse){
+            if(isset($request->feedback))
             $studentcourse->feedback = $request->feedback;
+            if(isset($request->student_id))
+            $studentcourse->student_id = $request->student_id;
+            if(isset($request->score))
+            $studentcourse->score = $request->score;
+            if(isset($request->course_id))
+            $studentcourse->course_id = $request->course_id;
             $studentcourse->save();
-            return response()->json('record updated', 200);
+            return response()->json('Record Updated', 200);
         }
-        return response()->json('error not found', 404);
+        return response()->json('Error Record Not Found', 404);
 
+    }
+    public function store(Request $request)
+    {
+            $studentcourse=new StudentCourse();
+            $studentcourse->feedback = $request->feedback;
+            $studentcourse->student_id = $request->student_id;
+            $studentcourse->score = $request->score;
+            $studentcourse->course_id = $request->course_id;
+            $studentcourse->save();
+        return response()->json(['Record Created Successfully', 200]);
+    }
+    public function delete($id) {
+        $studentcourse = StudentCourse::with('StudentInstance','CourseInstance')->where('student_id', $id)->first();
+        if($studentcourse)
+           $studentcourse->delete(); 
+        return response()->json('Error Record Not Found', 404);
     }
 }

@@ -38,7 +38,11 @@ Route::get('/courses', [coursesController::class, 'listCourse']);
 Route::get('/scores',[studentcourseController::class, 'index']);
 Route::get('/scores/{id}',[studentcourseController::class, 'show']);
 Route::post('/scores/{id}',[studentcourseController::class, 'update']);
-
+Route::post('/scores',[studentcourseController::class, 'store']);
+Route::delete('/scores/{id}',[studentcourseController::class, 'delete']);
 
 Route::get('/posts',[postsController::class, 'index']);
 Route::get('/posts/{id}',[postsController::class, 'show']);
+Route::post('/posts/{id}',[postsController::class, 'update']);
+Route::post('/posts',[postsController::class, 'store']);
+Route::delete('/posts/{id}',[postsController::class, 'delete']);
