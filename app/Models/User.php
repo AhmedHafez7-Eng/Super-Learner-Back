@@ -50,5 +50,6 @@ class User extends Authenticatable
     public function courseofinstructor(){
         return $this->hasMany(Course::class,'instructor_id', 'id');
     }
+  
     
 }

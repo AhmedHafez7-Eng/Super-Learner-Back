@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIs\instructorController;
 use App\Http\Controllers\APIs\coursesController;
+use App\Http\Controllers\APIs\postsController;
+use App\Http\Controllers\APIs\studentcourseController;
+
 use App\Models\User;
 use App\Models\Course;
 /*
@@ -20,12 +23,22 @@ use App\Models\Course;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/instructors',[instructorController::class,'list']);
+Route::get('/instructors', [instructorController::class, 'list']);
 Route::post('/register', [instructorController::class, 'register']);
-Route::post('/upload/{id}',[instructorController::class,'saveimg']);
-Route::get('/courseinfo/{id}',[instructorController::class,'getone']);
-Route::get('/getimage/{id}',[instructorController::class,'getimageof']);
+Route::post('/upload/{id}', [instructorController::class, 'saveimg']);
+Route::get('/courseinfo/{id}', [instructorController::class, 'getone']);
+Route::get('/getimage/{id}', [instructorController::class, 'getimageof']);
 Route::get('/delete/{id}', [instructorController::class, 'delete']);
-Route::post('/uploadimg/{id}',[instructorController::class,'saveimgcourse']);
+Route::post('/uploadimg/{id}', [instructorController::class, 'saveimgcourse']);
 /////////////////////////////////////////////////////////////
-Route::get('/courses',[coursesController::class,'listCourse']);
+Route::get('/courses', [coursesController::class, 'listCourse']);
+
+
+/////////API Student Courses /////////////////////
+Route::get('/scores',[studentcourseController::class, 'index']);
+Route::get('/scores/{id}',[studentcourseController::class, 'show']);
+Route::post('/scores/{id}',[studentcourseController::class, 'update']);
+
+
+Route::get('/posts',[postsController::class, 'index']);
+Route::get('/posts/{id}',[postsController::class, 'show']);
