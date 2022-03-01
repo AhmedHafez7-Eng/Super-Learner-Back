@@ -13,11 +13,11 @@ class instructorController extends Controller
 {
     //
     public function list()
-
+   
     {
         //$user=auth()->user();
         //if ($user->tokenCan('all:list')) {
-        $instructor = User::all()->where('role', 'instructor');
+        $instructor = User::where('role','instructor')->get();
         foreach ($instructor as $ss) {
             $img = $ss->profile_pic;
             $url = asset('userImg/' . $img);

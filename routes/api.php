@@ -40,14 +40,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 // ------ Protected Routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
+//Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/students', [StudentController::class, 'index']);
     Route::get('/students/{id}', [StudentController::class, 'show']);
     Route::put('/students/{id}', [StudentController::class, 'update']);
     Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 
     // Route::apiResource('students', StudentController::class);
-});
+//});
 
 
 // ====================== Instructor Routes
