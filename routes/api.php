@@ -67,16 +67,16 @@ Route::get('/courses', [coursesController::class, 'listCourse']);
 
 // =========================================tests routes========================================================
 
-Route::get('/tests',[TestsController::class,'index']);
-Route::get('/tests/{id}',[TestsController::class,'show']);
-Route::post('/tests',[TestsController::class,'create']);
+Route::get('/tests', [TestsController::class, 'index']);
+Route::get('/tests/{id}', [TestsController::class, 'show']);
+Route::post('/tests', [TestsController::class, 'store']);
 Route::put('/tests/{id}', [TestsController::class, 'update']);
 Route::delete('/tests/{id}', [TestsController::class, 'delete']);
 // ========================================= testsDetails routes========================================================
 
-Route::get('/testsdetails',[TestDetailsController::class,'index']);
-Route::get('/testsdetails/{id}',[TestDetailsController::class,'show']);
-Route::post('/testsdetails',[TestDetailsController::class,'create']);
+Route::get('/testsdetails', [TestDetailsController::class, 'index']);
+Route::get('/testsdetails/{id}', [TestDetailsController::class, 'show']);
+Route::post('/testsdetails', [TestDetailsController::class, 'store']);
 Route::put('/testsdetails/{id}', [TestDetailsController::class, 'update']);
 Route::delete('/testsdetails/{id}', [TestDetailsController::class, 'delete']);
 
