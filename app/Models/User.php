@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Models;
+
 use App\Models\Course;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -26,7 +28,8 @@ class User extends Authenticatable
         'phone',
         'address',
         'role',
-        
+        'profile_pic',
+
     ];
 
     /**
@@ -47,9 +50,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function courseofinstructor(){
-        return $this->hasMany(Course::class,'instructor_id', 'id');
+    public function courseofinstructor()
+    {
+        return $this->hasMany(Course::class, 'instructor_id', 'id');
     }
-  
-    
+
 }
