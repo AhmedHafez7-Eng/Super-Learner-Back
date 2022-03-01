@@ -20,7 +20,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = User::all()->where('role', 'student');
+        $students = User::where('role', 'student')->get();
         foreach ($students as $student) {
             $img = $student->profile_pic;
             $url = asset('userImg/' . $img);

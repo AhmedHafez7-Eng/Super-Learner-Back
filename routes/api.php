@@ -40,14 +40,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 // ------ Protected Routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
+//Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/students', [StudentController::class, 'index']);
     Route::get('/students/{id}', [StudentController::class, 'show']);
     Route::put('/students/{id}', [StudentController::class, 'update']);
     Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 
     // Route::apiResource('students', StudentController::class);
-});
+//});
 
 
 // ====================== Instructor Routes
@@ -57,13 +57,13 @@ Route::post('/upload/{id}', [instructorController::class, 'saveimg']);
 Route::get('/courseinfo/{id}', [instructorController::class, 'getone']);
 Route::get('/getimage/{id}', [instructorController::class, 'getimageof']);
 Route::get('/delete/{id}', [instructorController::class, 'delete']);
-Route::post('/uploadimg/{id}', [instructorController::class, 'saveimgcourse']);
 
 
 // ====================== Courses Routes
-Route::get('/courses', [coursesController::class, 'listCourse']);
-
-
+Route::get('/courses',[coursesController::class,'listCourse']);
+Route::post('/uploadimg/{id}',[coursesController::class,'saveimgcourse']);
+Route::post('/update/{id}', [coursesController::class, 'update']);
+Route::get('/course/{id}',[coursesController::class,'getCourse']);
 
 // =========================================tests routes========================================================
 
