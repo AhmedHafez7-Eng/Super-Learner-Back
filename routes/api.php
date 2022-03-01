@@ -72,6 +72,9 @@ Route::get('/tests/{id}',[TestsController::class,'show']);
 Route::post('/tests',[TestsController::class,'create']);
 Route::put('/tests/{id}', [TestsController::class, 'update']);
 Route::delete('/tests/{id}', [TestsController::class, 'delete']);
+Route::get('/quiz/{course_id}',[TestsController::class,'gettest']);
+Route::get('/ques/{test_id}',[TestsController::class,'getdetails']);
+
 // ========================================= testsDetails routes========================================================
 
 Route::get('/testsdetails',[TestDetailsController::class,'index']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\APIs;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Test;
+use App\Models\Course;
 use Validator;
 class TestsController extends Controller
 {
@@ -50,4 +51,12 @@ class TestsController extends Controller
         $test->delete();
         return response()->json(null,204);
     } 
+    public function gettest($course_id){
+$test=Course::find($course_id)->TestOfCourse;
+return response($test);
+    }
+    public function getdetails($test_id){
+        $testdetails=Test::find($test_id)->detailsOfTest;
+        return response($testdetails);
+    }
 }
