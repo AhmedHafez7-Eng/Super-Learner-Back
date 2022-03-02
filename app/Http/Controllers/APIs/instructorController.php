@@ -51,6 +51,10 @@ class instructorController extends Controller
     ///////////////////////////////////////////////////
    public function  getone($id){
         $instructor=User::find($id);
+        $img = $instructor->profile_pic;
+            $url = asset('userImg/' . $img);
+            $instructor->profile_pic=$url;
+           
         $courses=$instructor->courseofinstructor;
         return response($courses);
     }
