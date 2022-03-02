@@ -16,7 +16,7 @@ class coursesController extends Controller
             $url=asset('courseImg/'.$img);
             //array_push($urls,$url);
             $ss->course_img=$url;
-        }
+       }
         return response()->json($courses);
     }
     /////////////////////////////////////////////////

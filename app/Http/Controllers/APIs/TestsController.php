@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Test;
 use Illuminate\Support\Facades\Validator;
 
+use App\Models\Course;
+
 class TestsController extends Controller
 {
 
@@ -54,5 +56,16 @@ class TestsController extends Controller
         }
         $test->delete();
         return response()->json(null, 204);
+    }
+
+    public function gettest($course_id)
+    {
+        $test = Course::find($course_id)->TestOfCourse;
+        return response($test);
+    }
+    public function getdetails($test_id)
+    {
+        $testdetails = Test::find($test_id)->detailsOfTest;
+        return response($testdetails);
     }
 }
