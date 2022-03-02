@@ -13,32 +13,33 @@ class instructorController extends Controller
 {
     //
     public function list()
-   
+
     {
         //$user=auth()->user();
         //if ($user->tokenCan('all:list')) {
-        $instructor = User::where('role','instructor')->get();
+        $instructor = User::where('role', 'instructor')->get();
         foreach ($instructor as $ss) {
             $img = $ss->profile_pic;
             $url = asset('userImg/' . $img);
             //array_push($urls,$url);
-            $ss->profile_pic=$url;
+            $ss->profile_pic = $url;
             $ss->courseofinstructor;
         }
-            
-            return response()->json(
-              ['instructors'=>  $instructor,
-              ] 
-            );  // in json format
-        
-   // }
-        
+
+        return response()->json(
+            [
+                'instructors' =>  $instructor,
+            ]
+        );  // in json format
+
+        // }
+
 
     }
     /////////////////////////////////////////////
-   //////////////////
-   ////////////////////////////////////////////////
-        public function saveimg(Request $request, $id)
+    //////////////////
+    ////////////////////////////////////////////////
+    public function saveimg(Request $request, $id)
     {
         $instructor = User::find($id);
         $image = $request->profile_pic;
@@ -49,11 +50,14 @@ class instructorController extends Controller
         return response()->json('saved changes');
     }
     ///////////////////////////////////////////////////
-   public function  getone($id){
-        $instructor=User::find($id);
-        $courses=$instructor->courseofinstructor;
+    public function  getone($id)
+    {
+        $instructor = User::find($id);
+        $img = $instructor->profile_pic;
+        $url = asset('userImg/' . $img);
+        $instructor->profile_pic = $url;
+
+        $courses = $instructor->courseofinstructor;
         return response($courses);
     }
-  
-
 }
