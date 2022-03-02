@@ -72,7 +72,10 @@ Route::get('/tests/{id}',[TestsController::class,'show']);
 Route::post('/tests',[TestsController::class,'create']);
 Route::put('/tests/{id}', [TestsController::class, 'update']);
 Route::delete('/tests/{id}', [TestsController::class, 'delete']);
+/////////////////////////////////////////////////////
+//get all tests related to specific course
 Route::get('/quiz/{course_id}',[TestsController::class,'gettest']);
+//get collection of questions to each test
 Route::get('/ques/{test_id}',[TestsController::class,'getdetails']);
 
 // ========================================= testsDetails routes========================================================
