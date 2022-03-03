@@ -23,12 +23,12 @@ class AuthController extends Controller
             'address' => 'required|string|max:255',
             'b_date' => 'required| date',
             'role' => 'required',
-            'profile_pic' => 'required|mimes:jpeg,png,jpg',
+            // 'profile_pic' => 'required|mimes:jpeg,png,jpg',
         ]);
 
-        $image = $request->profile_pic;
-        $imageName = time() . '.' . $image->getClientoriginalExtension();
-        $request->profile_pic->move('userImg', $imageName);
+        // $image = $request->profile_pic;
+        // $imageName = time() . '.' . $image->getClientoriginalExtension();
+        // $request->profile_pic->move('userImg', $imageName);
 
         $user = User::create([
             'fname' => $validatedData['fname'],
@@ -39,7 +39,7 @@ class AuthController extends Controller
             'address' => $validatedData['address'],
             'password' => Hash::make($validatedData['password']),
             'role' => $validatedData['role'],
-            'profile_pic' => $imageName,
+            // 'profile_pic' => $imageName,
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
 
