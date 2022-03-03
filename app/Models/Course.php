@@ -20,6 +20,7 @@ class Course extends Model
     {
         return $this->belongsTo(User::class, 'instructor_id', 'id');
     }
+  
     public function TestOfCourse()
     {
         return $this->hasMany(Test::class, 'course_id', 'id');
