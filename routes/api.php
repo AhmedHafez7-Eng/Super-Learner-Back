@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::get('/instructors', [instructorController::class, 'list']);
-Route::post('/register', [instructorController::class, 'register']);
+//Route::post('/register', [instructorController::class, 'register']);
 
 
 // ====================== Student Routes
