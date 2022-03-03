@@ -37,9 +37,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-Route::get('/instructors', [instructorController::class, 'list']);
-Route::post('/register', [instructorController::class, 'register']);
-
 
 // ====================== Student Routes
 // ------ Public Routes
@@ -47,12 +44,12 @@ Route::post('/register', [instructorController::class, 'register']);
 
 // ------ Protected Routes
 //Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/students', [StudentController::class, 'index']);
-    Route::get('/students/{id}', [StudentController::class, 'show']);
-    Route::put('/students/{id}', [StudentController::class, 'update']);
-    Route::delete('/students/{id}', [StudentController::class, 'destroy']);
+Route::get('/students', [StudentController::class, 'index']);
+Route::get('/students/{id}', [StudentController::class, 'show']);
+Route::put('/students/{id}', [StudentController::class, 'update']);
+Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 
-    // Route::apiResource('students', StudentController::class);
+// Route::apiResource('students', StudentController::class);
 //});
 
 
@@ -66,29 +63,27 @@ Route::get('/delete/{id}', [instructorController::class, 'delete']);
 
 Route::post('/uploadimg/{id}', [instructorController::class, 'saveimgcourse']);
 /////////////////////////////////////////////////////////////
+// ====================== Courses Routes
 Route::get('/courses', [coursesController::class, 'listCourse']);
+Route::post('/uploadimg/{id}', [coursesController::class, 'saveimgcourse']);
+Route::post('/update/{id}', [coursesController::class, 'update']);
+Route::get('/course/{id}', [coursesController::class, 'getCourse']);
 
 
 /////////API Student Courses /////////////////////
-Route::get('/scores',[studentcourseController::class, 'index']);
-Route::get('/scores/{id}',[studentcourseController::class, 'show']);
-Route::post('/scores/{id}',[studentcourseController::class, 'update']);
-Route::post('/scores',[studentcourseController::class, 'store']);
-Route::delete('/scores/{id}',[studentcourseController::class, 'delete']);
+Route::get('/scores', [studentcourseController::class, 'index']);
+Route::get('/scores/{id}', [studentcourseController::class, 'show']);
+Route::post('/scores/{id}', [studentcourseController::class, 'update']);
+Route::post('/scores', [studentcourseController::class, 'store']);
+Route::delete('/scores/{id}', [studentcourseController::class, 'delete']);
 
-Route::get('/posts',[postsController::class, 'index']);
-Route::get('/posts/{id}',[postsController::class, 'show']);
-Route::post('/posts/{id}',[postsController::class, 'update']);
-Route::post('/posts',[postsController::class, 'store']);
-Route::delete('/posts/{id}',[postsController::class, 'delete']);
+Route::get('/posts', [postsController::class, 'index']);
+Route::get('/posts/{id}', [postsController::class, 'show']);
+Route::post('/posts/{id}', [postsController::class, 'update']);
+Route::post('/posts', [postsController::class, 'store']);
+Route::delete('/posts/{id}', [postsController::class, 'delete']);
 
 
-
-// ====================== Courses Routes
-Route::get('/courses',[coursesController::class,'listCourse']);
-Route::post('/uploadimg/{id}',[coursesController::class,'saveimgcourse']);
-Route::post('/update/{id}', [coursesController::class, 'update']);
-Route::get('/course/{id}',[coursesController::class,'getCourse']);
 
 // =========================================tests routes========================================================
 
@@ -99,9 +94,9 @@ Route::put('/tests/{id}', [TestsController::class, 'update']);
 Route::delete('/tests/{id}', [TestsController::class, 'delete']);
 /////////////////////////////////////////////////////
 //get all tests related to specific course
-Route::get('/quiz/{course_id}',[TestsController::class,'gettest']);
+Route::get('/quiz/{course_id}', [TestsController::class, 'gettest']);
 //get collection of questions to each test
-Route::get('/ques/{test_id}',[TestsController::class,'getdetails']);
+Route::get('/ques/{test_id}', [TestsController::class, 'getdetails']);
 
 // ========================================= testsDetails routes========================================================
 
@@ -116,4 +111,3 @@ Route::delete('/testsdetails/{id}', [TestDetailsController::class, 'delete']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
