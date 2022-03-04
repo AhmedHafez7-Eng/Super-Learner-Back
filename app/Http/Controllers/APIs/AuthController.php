@@ -19,27 +19,27 @@ class AuthController extends Controller
             'lname' => 'required|string|min:2|max:70',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'phone' => 'required|numeric|digits:11',
-            'address' => 'required|string|max:255',
-            'b_date' => 'required| date',
-            'role' => 'required',
-            'profile_pic' => 'required|mimes:jpeg,png,jpg',
+            // 'phone' => 'required|numeric|digits:11',
+            // 'address' => 'required|string|max:255',
+            // 'b_date' => 'required| date',
+            // 'role' => 'required',
+            // 'profile_pic' => 'required|mimes:jpeg,png,jpg',
         ]);
 
-        $image = $request->profile_pic;
-        $imageName = time() . '.' . $image->getClientoriginalExtension();
-        $request->profile_pic->move('userImg', $imageName);
+        // $image = $request->profile_pic;
+        // $imageName = time() . '.' . $image->getClientoriginalExtension();
+        // $request->profile_pic->move('userImg', $imageName);
 
         $user = User::create([
             'fname' => $validatedData['fname'],
             'lname' => $validatedData['lname'],
             'email' => $validatedData['email'],
-            'b_date' => $validatedData['b_date'],
-            'phone' => $validatedData['phone'],
-            'address' => $validatedData['address'],
+            'b_date' => $request['b_date'],
+            'phone' => $request['phone'],
+            'address' => $request['address'],
             'password' => Hash::make($validatedData['password']),
-            'role' => $validatedData['role'],
-            'profile_pic' => $imageName,
+            'role' => $request['role'],
+            // 'profile_pic' => $imageName,
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
 

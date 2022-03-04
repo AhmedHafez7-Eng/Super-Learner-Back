@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\User;
+use App\Models\StudentCourse;
 
 class StudentController extends Controller
 {
@@ -123,5 +124,10 @@ class StudentController extends Controller
         }
         $student->delete();
         return response()->json(null, 204);
+    }
+    public function courses_stu($id){
+        $student=User::find($id)->StudentInstance;
+        return response($student);
+
     }
 }

@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/students/{id}', [StudentController::class, 'show']);
     Route::put('/students/{id}', [StudentController::class, 'update']);
     Route::delete('/students/{id}', [StudentController::class, 'destroy']);
-
+    Route::get('/courseofstu/{id}', [StudentController::class, 'courses_stu']);
     // Route::apiResource('students', StudentController::class);
 //});
 
