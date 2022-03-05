@@ -15,9 +15,11 @@ class StudentCourseResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'courseName'=>$this->course_id,//CourseInstance['title'],
-            'studentName'=>$this->student_id,      //StudentInstance->fname,
-            'score'=>$this->score,
+            'studentDetails' => [
+                'student_id' => $this->student_id
+            ],      //StudentInstance->fname,
+            'courseDetails' => $this->course_id, //CourseInstance['title'],
+            'score' => $this->score,
         ];
     }
 }
