@@ -71,11 +71,11 @@ Route::get('/course/{id}', [coursesController::class, 'getCourse']);
 
 
 /////////API Student Courses /////////////////////
-Route::get('/scores', [studentcourseController::class, 'index']);
-Route::get('/scores/{id}', [studentcourseController::class, 'show']);
-Route::post('/scores/{id}', [studentcourseController::class, 'update']);
-Route::post('/scores', [studentcourseController::class, 'store']);
-Route::delete('/scores/{id}', [studentcourseController::class, 'delete']);
+Route::get('/student-courses', [studentcourseController::class, 'index']);
+Route::get('/student-courses/{id}', [studentcourseController::class, 'show']);
+// Route::post('/scores/{id}', [studentcourseController::class, 'update']);
+// Route::post('/scores', [studentcourseController::class, 'store']);
+// Route::delete('/scores/{id}', [studentcourseController::class, 'delete']);
 
 Route::get('/posts', [postsController::class, 'index']);
 Route::get('/posts/{id}', [postsController::class, 'show']);
