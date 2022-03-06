@@ -19,15 +19,17 @@ class AuthController extends Controller
             'lname' => 'required|string|min:2|max:70',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            // 'phone' => 'required|numeric|digits:11',
-            // 'address' => 'required|string|max:255',
-            // 'b_date' => 'required| date',
-            // 'role' => 'required',
+            'phone' => 'required|numeric|digits:11',
+            'address' => 'required|string|max:255',
+            'b_date' => 'required| date',
+            'role' => 'required',
             // 'profile_pic' => 'required|mimes:jpeg,png,jpg',
         ]);
+
         // $image = $request->profile_pic;
         // $imageName = time() . '.' . $image->getClientoriginalExtension();
         // $request->profile_pic->move('userImg', $imageName);
+
         $user = User::create([
             'fname' => $validatedData['fname'],
             'lname' => $validatedData['lname'],
@@ -36,7 +38,7 @@ class AuthController extends Controller
             'phone' => $request['phone'],
             'address' => $request['address'],
             'password' => Hash::make($validatedData['password']),
-            'role' => $request['role'],
+            'role' => $validatedData['role'],
             // 'profile_pic' => $imageName,
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
