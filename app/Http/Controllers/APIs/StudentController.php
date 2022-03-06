@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\User;
+use App\Models\Course;
 use App\Models\StudentCourse;
 
 class StudentController extends Controller
@@ -125,9 +126,33 @@ class StudentController extends Controller
         $student->delete();
         return response()->json(null, 204);
     }
-    public function courses_stu($id){
-        $student=User::find($id)->StudentInstance;
-        return response($student);
-
+   
+    public function coursestu($id)
+    {
+        $student = StudentCourse::with('StudentInstance')->where('student_id', $id)->first();
+        $studentcourse = StudentCourse::with('CourseInstance')->where('student_id', $id)->get();
+        if ($student && $studentcourse)
+    
+            return response()->json( $studentcourse, 200);
+        return response()->json('error not found', 404);
+    }
+////////////////////////////////////////////////////////////////////
+    
+    ///////////////////////////////////////////
+    public function enrolle(Request $request){
+        $studentHasCourses=User::find($request['student_id'])->studcourse;
+       foreach($studentHasCourses as $check){
+           if($check->course_id==$request['course_id'])
+           return response()->json(
+               'already enrolled in this course ,check your courses' );
+    
+       }
+        $course=Course::find($request['course_id']);
+        $stu_course= StudentCourse::create([
+                     'student_id'=>$request['student_id'],
+                     'course_id'=>$request['course_id'],
+        ]);
+        
+        return response()->json('you have enrolled in '.$course->title. ' course ,check your courses' );
     }
 }
