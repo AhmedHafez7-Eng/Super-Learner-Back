@@ -61,3 +61,21 @@ class instructorController extends Controller
         return response($courses);
     }
 }
+
+// public function index()
+//     {
+//         $studentcourses = StudentCourse::with('StudentInstance', 'CourseInstance')->get();
+//         if ($studentcourses)
+//             return response()->json($studentcourses, 200);
+//         // return response()->json(StudentCourseResource::collection($studentcourses), 200);
+//         return response()->json('message -> error not found', 404);
+//     }
+//     public function show($id)
+//     {
+//         $student = StudentCourse::with('StudentInstance')->where('student_id', $id)->first();
+//         $studentcourse = StudentCourse::with('CourseInstance')->where('student_id', $id)->get();
+//         if ($student && $studentcourse)
+//             // return response()->json(new StudentCourseResource($studentcourse), 200);
+//             return response()->json([$student, $studentcourse], 200);
+//         return response()->json('error not found', 404);
+//     }
