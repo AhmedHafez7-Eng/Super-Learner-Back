@@ -110,14 +110,12 @@ Route::put('/testsdetails/{id}', [TestDetailsController::class, 'update']);
 Route::delete('/testsdetails/{id}', [TestDetailsController::class, 'delete']);
 
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-
-
 /////////////////////////////  payment //////////////////////////////////
 
 Route::post('pay', [FatoorahController::class, 'payOrder']);
-Route::get('pay', [FatoorahController::class, 'payOrder']);
+// Route::get('pay', [FatoorahController::class, 'payOrder']);
 Route::get('call_back', [FatoorahController::class, 'callBack']);
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });

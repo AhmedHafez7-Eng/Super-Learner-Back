@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\FatoorahService;
+use App\Http\services\FatoorahService;
 use Illuminate\Http\Request;
 
 class FatoorahController extends Controller
@@ -20,13 +20,13 @@ class FatoorahController extends Controller
 
     public function payOrder(Request $request)
     {
-        
+
         $data = [
             "CustomerName" => $request->CustomerName,
             "NotificationOption" => "Lnk",
             "MobileCountryCode" => "965",
-            "CustomerMobile" => "12345678",
-            "CustomerEmail" => "mail@company.com",
+            "CustomerMobile" => $request->CustomerMobile,
+            "CustomerEmail" => $request->CustomerEmail,
             "InvoiceValue" => 100,
             "DisplayCurrencyIso" => "kwd",
             "CallBackUrl" => env('success_url'),
@@ -42,10 +42,9 @@ class FatoorahController extends Controller
         $data = [];
         $data['Key'] = $request->payementId;
         $data['KeyType'] = 'paymentId';
-        
-      return  $paymentData = $this->fatoorahServices->getPaymentStatus($data);
+
+        return  $paymentData = $this->fatoorahServices->getPaymentStatus($data);
         // search where invoice id = $paymentData['Data]['InvoiceId];
 
     }
-
 }
