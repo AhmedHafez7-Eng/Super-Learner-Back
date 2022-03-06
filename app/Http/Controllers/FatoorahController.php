@@ -18,11 +18,11 @@ class FatoorahController extends Controller
         $this->fatoorahServices = $fatoorahServices;
     }
 
-    public function payOrder()
+    public function payOrder(Request $request)
     {
         
         $data = [
-            "CustomerName" => "Ali",
+            "CustomerName" => $request->CustomerName,
             "NotificationOption" => "Lnk",
             "MobileCountryCode" => "965",
             "CustomerMobile" => "12345678",
@@ -42,7 +42,7 @@ class FatoorahController extends Controller
         $data = [];
         $data['Key'] = $request->payementId;
         $data['KeyType'] = 'paymentId';
-
+        
       return  $paymentData = $this->fatoorahServices->getPaymentStatus($data);
         // search where invoice id = $paymentData['Data]['InvoiceId];
 

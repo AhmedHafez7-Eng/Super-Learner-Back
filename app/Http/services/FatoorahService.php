@@ -29,8 +29,6 @@ class FatoorahService
             'authorization' => 'Bearer ' . env('fatoorah_token'),
             'Content-Type' => 'application/json',
         ];
-
-
     }
 
     private function buildRequest($uri, $method, $data = [])
@@ -39,15 +37,15 @@ class FatoorahService
 
         $request = new Request($method, $this->base_url . $uri, $this->headers);
 
-       if (!$data)
-           return false;
+        if (!$data)
+            return false;
 
         $response = $this->request_client->send($request, [
             'json' => $data
         ]);
-       if ($response->getStatusCode() != 200){
-           return false;
-       }
+        if ($response->getStatusCode() != 200) {
+            return false;
+        }
         $response = json_decode($response->getBody(), true);
 
         return $response;
@@ -57,9 +55,9 @@ class FatoorahService
     {
 
         return $response = $this->buildRequest('v2/SendPayment', 'POST', $data);
-//        if ($response)
-//            $this->saveTransacionPayment($patient_id, $response['Data']['InvoiceId']);
-//
+        //        if ($response)
+        //            $this->saveTransacionPayment($patient_id, $response['Data']['InvoiceId']);
+        //
 
 
 
@@ -69,8 +67,5 @@ class FatoorahService
     {
 
         return $response = $this->buildRequest('v2/getPaymentStatus', 'POST', $data);
-
     }
-
-
 }
