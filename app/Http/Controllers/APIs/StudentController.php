@@ -137,7 +137,19 @@ class StudentController extends Controller
         return response()->json('error not found', 404);
     }
 ////////////////////////////////////////////////////////////////////
-    
+public function ifenroll(Request $request){
+    $user=User::find($request['user_id']);
+    if( $user->role=='instructor')
+    return response()->json('pleaze,sign as student');
+      else 
+     { foreach($user->studcourse as $course)
+      {if($course->course_id==$request['course_id'])
+        return response(1);
+    }}
+        return response(0);
+   
+
+}
     ///////////////////////////////////////////
     public function enrolle(Request $request){
         $studentHasCourses=User::find($request['student_id'])->studcourse;
