@@ -11,6 +11,7 @@ use App\Http\Controllers\APIs\postsController;
 use App\Http\Controllers\APIs\studentcourseController;
 
 use App\Http\Controllers\APIs\StudentController;
+use App\Http\Controllers\FatoorahController;
 use App\Models\User;
 use App\Models\Course;
 /*
@@ -112,4 +113,11 @@ Route::delete('/testsdetails/{id}', [TestDetailsController::class, 'delete']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+
+
+/////////////////////////////  payment //////////////////////////////////
+
+Route::post('pay', [FatoorahController::class, 'payOrder']);
+Route::get('pay', [FatoorahController::class, 'payOrder']);
+Route::get('call_back', [FatoorahController::class, 'callBack']);
 });
