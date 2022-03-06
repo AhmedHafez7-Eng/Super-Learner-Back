@@ -115,7 +115,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 /////////////////////////////  payment //////////////////////////////////
 
-Route::post('pay', [FatoorahController::class, 'payOrder']);
+Route::post('pay',[FatoorahController::class, 'payOrder']);
 Route::get('pay', [FatoorahController::class, 'payOrder']);
 Route::get('call_back', [FatoorahController::class, 'callBack']);
 });
