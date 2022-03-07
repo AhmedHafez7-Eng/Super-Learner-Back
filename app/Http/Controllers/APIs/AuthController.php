@@ -23,6 +23,10 @@ class AuthController extends Controller
             'address' => 'required|string|max:255',
             'b_date' => 'required| date',
             'role' => 'required',
+            // 'phone' => 'required|numeric|digits:11',
+            // 'address' => 'required|string|max:255',
+            // 'b_date' => 'required| date',
+            // 'role' => 'required',
             // 'profile_pic' => 'required|mimes:jpeg,png,jpg',
         ]);
 
@@ -34,15 +38,15 @@ class AuthController extends Controller
             'fname' => $validatedData['fname'],
             'lname' => $validatedData['lname'],
             'email' => $validatedData['email'],
-            'b_date' => $validatedData['b_date'],
-            'phone' => $validatedData['phone'],
-            'address' => $validatedData['address'],
+            'b_date' => $request['b_date'],
+            'phone' => $request['phone'],
+            'address' => $request['address'],
             'password' => Hash::make($validatedData['password']),
             'role' => $validatedData['role'],
+            // 'role' => $request['role'],
             // 'profile_pic' => $imageName,
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
-
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',

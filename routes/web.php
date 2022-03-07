@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\FatoorahController;
 use Illuminate\Support\Facades\Route;
 // use app\http\controllers\mailController;
 // use App\Http\Controllers\mailController;
@@ -20,4 +20,5 @@ use App\Http\Controllers\mailController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('mail', [mailController::class, 'store']);
+Route::get('mail', [StudentController::class, 'enrolle']);
+Route::post('pay', [FatoorahController::class, 'payOrder']);

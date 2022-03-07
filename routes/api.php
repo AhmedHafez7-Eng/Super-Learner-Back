@@ -11,6 +11,7 @@ use App\Http\Controllers\APIs\postsController;
 use App\Http\Controllers\APIs\studentcourseController;
 
 use App\Http\Controllers\APIs\StudentController;
+use App\Http\Controllers\FatoorahController;
 use App\Models\User;
 use App\Models\Course;
 /*
@@ -48,6 +49,8 @@ Route::get('/students', [StudentController::class, 'index']);
 Route::get('/students/{id}', [StudentController::class, 'show']);
 Route::put('/students/{id}', [StudentController::class, 'update']);
 Route::delete('/students/{id}', [StudentController::class, 'destroy']);
+Route::get('/courseofstu/{id}', [StudentController::class, 'coursestu']);
+Route::post('/enrolle', [StudentController::class, 'enrolle']);
 
 // Route::apiResource('students', StudentController::class);
 //});
@@ -71,11 +74,11 @@ Route::get('/course/{id}', [coursesController::class, 'getCourse']);
 
 
 /////////API Student Courses /////////////////////
-Route::get('/scores', [studentcourseController::class, 'index']);
-Route::get('/scores/{id}', [studentcourseController::class, 'show']);
-Route::post('/scores/{id}', [studentcourseController::class, 'update']);
-Route::post('/scores', [studentcourseController::class, 'store']);
-Route::delete('/scores/{id}', [studentcourseController::class, 'delete']);
+Route::get('/student-courses', [studentcourseController::class, 'index']);
+Route::get('/student-courses/{id}', [studentcourseController::class, 'show']);
+// Route::post('/scores/{id}', [studentcourseController::class, 'update']);
+// Route::post('/scores', [studentcourseController::class, 'store']);
+// Route::delete('/scores/{id}', [studentcourseController::class, 'delete']);
 
 Route::get('/posts', [postsController::class, 'index']);
 Route::get('/posts/{id}', [postsController::class, 'show']);
@@ -107,6 +110,11 @@ Route::put('/testsdetails/{id}', [TestDetailsController::class, 'update']);
 Route::delete('/testsdetails/{id}', [TestDetailsController::class, 'delete']);
 
 
+/////////////////////////////  payment //////////////////////////////////
+
+Route::post('pay', [FatoorahController::class, 'payOrder']);
+// Route::get('pay', [FatoorahController::class, 'payOrder']);
+Route::get('call_back', [FatoorahController::class, 'callBack']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

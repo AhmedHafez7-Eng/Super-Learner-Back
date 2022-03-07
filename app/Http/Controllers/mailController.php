@@ -14,6 +14,6 @@ class mailController extends Controller
     {
         // $order = Order::findOrFail($request->order_id);
 
-        Mail::to('daliamahmoud313@gmail.com')->send(new mailTrap());
+        // Mail::to('daliamahmoud313@gmail.com')->send(new mailTrap());
     }
 }

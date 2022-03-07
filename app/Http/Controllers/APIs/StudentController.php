@@ -8,8 +8,12 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\mailTrap;
 
 use App\Models\User;
+use App\Models\Course;
+use App\Models\StudentCourse;
 
 class StudentController extends Controller
 {
@@ -52,7 +56,10 @@ class StudentController extends Controller
         $student = User::find($id);
 
         if (is_null($student)) {
-            return response()->json(['message' => 'No Student Found With This ID To Show'], 404);
+            return response()->json(
+                ['message' => 'No Student Found With This ID To Show'],
+                404
+            );
         }
         $img = $student->profile_pic;
         $url = asset('userImg/' . $img);
@@ -70,11 +77,13 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $student = User::find($id);
 
         if (is_null($student)) {
-            return response()->json(['message' => 'No Student Found With This ID To Update'], 404);
+            return response()->json(
+                ['message' => 'No Student Found With This ID To Update'],
+                404
+            );
         }
 
         //======= Handling Inputs Errors
@@ -100,7 +109,6 @@ class StudentController extends Controller
             $student->profile_pic = $url;
             return response()->json($student, 200);
         } catch (\Illuminate\Database\QueryException $e) {
-
             //======= Handling Duplicate Entry Error
             $errorCode = $e->errorInfo[1];
             if ($errorCode == '1062') {
@@ -119,9 +127,52 @@ class StudentController extends Controller
     {
         $student = User::find($id);
         if (is_null($student)) {
-            return response()->json(['message' => 'No Student Found With This ID To Delete'], 404);
+            return response()->json(
+                ['message' => 'No Student Found With This ID To Delete'],
+                404
+            );
         }
         $student->delete();
         return response()->json(null, 204);
+    }
+
+    public function coursestu($id)
+    {
+        $student = StudentCourse::with('StudentInstance')
+            ->where('student_id', $id)
+            ->first();
+        $studentcourse = StudentCourse::with('CourseInstance')
+            ->where('student_id', $id)
+            ->get();
+        if ($student && $studentcourse) {
+            return response()->json($studentcourse, 200);
+        }
+        return response()->json('error not found', 404);
+    }
+    ////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////
+    public function enrolle(Request $request)
+    {
+        $studentHasCourses = User::find($request['student_id'])->studcourse;
+        foreach ($studentHasCourses as $check) {
+            if ($check->course_id == $request['course_id']) {
+                return response()->json(
+                    'already enrolled in this course ,check your courses'
+                );
+            }
+        }
+        $course = Course::find($request['course_id']);
+        $stu_course = StudentCourse::create([
+            'student_id' => $request['student_id'],
+            'course_id' => $request['course_id'],
+        ]);
+        Mail::to($request->email)->send(new mailTrap());
+
+        return response()->json(
+            'you have enrolled in ' .
+                $course->title .
+                ' course ,check your courses'
+        );
     }
 }
