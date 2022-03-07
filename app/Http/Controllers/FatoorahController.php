@@ -20,13 +20,12 @@ class FatoorahController extends Controller
 
     public function payOrder(Request $request)
     {
-
         $data = [
-            "CustomerName" => $request->CustomerName,
+            "CustomerName" => $request['fname'],
             "NotificationOption" => "Lnk",
             "MobileCountryCode" => "965",
-            "CustomerMobile" => $request->CustomerMobile,
-            "CustomerEmail" => $request->CustomerEmail,
+            "CustomerMobile" => $request['phone'],
+            "CustomerEmail" => $request['email'],
             "InvoiceValue" => 100,
             "DisplayCurrencyIso" => "kwd",
             "CallBackUrl" => env('success_url'),
@@ -34,7 +33,8 @@ class FatoorahController extends Controller
             "Language" => "en",
         ];
 
-        return $this->fatoorahServices->sendPayment($data);
+
+        return  response()->json($this->fatoorahServices->sendPayment($data));
     }
 
     public function callBack(Request $request)
