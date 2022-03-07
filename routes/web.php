@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// use app\http\controllers\mailController;
+// use App\Http\Controllers\mailController;
+
+use App\Http\Controllers\mailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('mail', [mailController::class, 'store']);
