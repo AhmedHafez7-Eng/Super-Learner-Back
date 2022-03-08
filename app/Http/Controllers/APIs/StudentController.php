@@ -28,8 +28,11 @@ class StudentController extends Controller
             $url = asset('userImg/' . $img);
             $student->profile_pic = $url;
         }
-
-        return response()->json($students, 200);
+        return response()->json(
+            [
+                'students' =>  $students,
+            ]
+        );  // in json format
     }
 
     /**
