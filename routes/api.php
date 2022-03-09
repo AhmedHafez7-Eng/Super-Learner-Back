@@ -94,7 +94,7 @@ Route::delete('/posts/{id}', [postsController::class, 'delete']);
 
 Route::get('/tests', [TestsController::class, 'index']);
 Route::get('/tests/{id}', [TestsController::class, 'show']);
-Route::post('/tests', [TestsController::class, 'store']);
+Route::post('/addTest', [TestsController::class, 'store']);
 Route::put('/tests/{id}', [TestsController::class, 'update']);
 Route::delete('/tests/{id}', [TestsController::class, 'delete']);
 /////////////////////////////////////////////////////

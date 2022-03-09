@@ -28,8 +28,8 @@ class FatoorahController extends Controller
             "CustomerEmail" => $request['email'],
             "InvoiceValue" => 100,
             "DisplayCurrencyIso" => "kwd",
-            "CallBackUrl" => env("success.url"),
-            "ErrorUrl" => env("error.url"),
+            "CallBackUrl" => env("success_url"),
+            "ErrorUrl" => env("error_url"),
             "Language" => "en",
         ];
 
