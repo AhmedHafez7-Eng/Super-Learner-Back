@@ -120,15 +120,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('pay', [FatoorahController::class, 'payOrder']);
 // Route::get('pay', [FatoorahController::class, 'payOrder']);
 Route::get('call_back', [FatoorahController::class, 'callBack']);
-<<<<<<< HEAD
+Route::get('error', [FatoorahController::class, 'callBack']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 //////////////////////////////admin/////////////
 Route::get('/delete/instructor/{id}', [instructorController::class, 'destroy']);
 Route::get('/delete/course/{id}', [coursesController::class, 'delete']);
 Route::get('/delete/student/{id}', [StudentController::class, 'delete']);
-=======
-Route::get('error', [FatoorahController::class, 'callBack']);
->>>>>>> amr
