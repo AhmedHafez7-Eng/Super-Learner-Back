@@ -29,8 +29,8 @@ class FatoorahController extends Controller
             "CustomerEmail" => $request->CustomerEmail,
             "InvoiceValue" => 100,
             "DisplayCurrencyIso" => "kwd",
-            "CallBackUrl" => env('success_url'),
-            "ErrorUrl" => env('error_url'),
+            "CallBackUrl" => env("success.url"),
+            "ErrorUrl" => env("error.url"),
             "Language" => "en",
         ];
 
@@ -39,10 +39,11 @@ class FatoorahController extends Controller
 
     public function callBack(Request $request)
     {
+       
         $data = [];
         $data['Key'] = $request->payementId;
         $data['KeyType'] = 'paymentId';
-
+        
         return  $paymentData = $this->fatoorahServices->getPaymentStatus($data);
         // search where invoice id = $paymentData['Data]['InvoiceId];
 
