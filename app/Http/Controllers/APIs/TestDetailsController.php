@@ -25,7 +25,7 @@ class TestDetailsController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'test_id' => 'required|exists:tests|integer',
+            'test_id' => 'required|exists:tests,id|integer',
             'question' => 'required|string',
             'answer1' => 'required|string|min:0|max:50',
             'answer2' => 'required|string|min:0|max:50',
