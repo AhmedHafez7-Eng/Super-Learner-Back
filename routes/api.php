@@ -94,7 +94,7 @@ Route::delete('/posts/{id}', [postsController::class, 'delete']);
 
 Route::get('/tests', [TestsController::class, 'index']);
 Route::get('/tests/{id}', [TestsController::class, 'show']);
-Route::post('/tests', [TestsController::class, 'store']);
+Route::post('/addTest', [TestsController::class, 'store']);
 Route::put('/tests/{id}', [TestsController::class, 'update']);
 Route::delete('/tests/{id}', [TestsController::class, 'delete']);
 /////////////////////////////////////////////////////
@@ -111,12 +111,16 @@ Route::post('/testsdetails', [TestDetailsController::class, 'store']);
 Route::put('/testsdetails/{id}', [TestDetailsController::class, 'update']);
 Route::delete('/testsdetails/{id}', [TestDetailsController::class, 'delete']);
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 /////////////////////////////  payment //////////////////////////////////
 
 Route::post('pay', [FatoorahController::class, 'payOrder']);
 // Route::get('pay', [FatoorahController::class, 'payOrder']);
 Route::get('call_back', [FatoorahController::class, 'callBack']);
+<<<<<<< HEAD
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -125,3 +129,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/delete/instructor/{id}', [instructorController::class, 'destroy']);
 Route::get('/delete/course/{id}', [coursesController::class, 'delete']);
 Route::get('/delete/student/{id}', [StudentController::class, 'delete']);
+=======
+Route::get('error', [FatoorahController::class, 'callBack']);
+>>>>>>> amr
