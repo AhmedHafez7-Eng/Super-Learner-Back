@@ -64,16 +64,16 @@ class instructorController extends Controller
     public function destroy($id)
     {
         $instructor = User::find($id);
-        $hiscourses=$instructor->courseofinstructor;
-        $hisname=$instructor->fname;
-       foreach($hiscourses as $course)
-         { $hasstu=StudentCourse::where('course_id',$course->id)->get();
-            if($hasstu->isEmpty())
-             $course->delete();
-            else  return response()->json('sorry can not delete');
-            }
+        $hiscourses = $instructor->courseofinstructor;
+        $hisname = $instructor->fname;
+        foreach ($hiscourses as $course) {
+            $hasstu = StudentCourse::where('course_id', $course->id)->get();
+            if ($hasstu->isEmpty())
+                $course->delete();
+            else  return response()->json('Sorry, This Instructor can not be deleted for now because it has active courses!');
+        }
         $instructor->delete();
-        return response()->json($hisname .'has deleted');
+        return response()->json($hisname . 'Has Been Deleted');
     }
 }
 

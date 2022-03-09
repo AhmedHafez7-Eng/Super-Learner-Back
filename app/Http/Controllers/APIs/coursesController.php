@@ -39,7 +39,7 @@ class coursesController extends Controller
         if ($course) {
 
             $course->title =  $request->title;
-             $course->desc =  $request->desc;
+            $course->desc =  $request->desc;
             $course->save();
             return response()->json('your item has updated');
         }
@@ -51,17 +51,15 @@ class coursesController extends Controller
 
         return response($course);
     }
-    public function delete($id){
-        $course=Course::find($id);
-        $itstitle=$course->title;
-        $hasstu=StudentCourse::where('course_id',$course->id)->get();
-        
-            if($hasstu->isEmpty())
-            
-            { $course->delete();
-             return response()->json($itstitle .'has deleted');}
-           else  return response()->json('sorry can not delete');
-            
-       
+    public function delete($id)
+    {
+        $course = Course::find($id);
+        $itstitle = $course->title;
+        $hasstu = StudentCourse::where('course_id', $course->id)->get();
+
+        if ($hasstu->isEmpty()) {
+            $course->delete();
+            return response()->json($itstitle . 'Has Been Deleted!');
+        } else  return response()->json('Sorry, This Course can not be deleted for now because it has enrolling students!');
     }
 }
