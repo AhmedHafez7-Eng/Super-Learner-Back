@@ -28,8 +28,11 @@ class StudentController extends Controller
             $url = asset('userImg/' . $img);
             $student->profile_pic = $url;
         }
-
-        return response()->json($students, 200);
+        return response()->json(
+            [
+                'students' =>  $students,
+            ]
+        );  // in json format
     }
 
     /**
@@ -126,33 +129,46 @@ class StudentController extends Controller
         $student->delete();
         return response()->json(null, 204);
     }
-   
+
     public function coursestu($id)
     {
         $student = StudentCourse::with('StudentInstance')->where('student_id', $id)->first();
         $studentcourse = StudentCourse::with('CourseInstance')->where('student_id', $id)->get();
         if ($student && $studentcourse)
-    
-            return response()->json( $studentcourse, 200);
+
+            return response()->json($studentcourse, 200);
         return response()->json('error not found', 404);
     }
-////////////////////////////////////////////////////////////////////
-    
+    ////////////////////////////////////////////////////////////////////
+    public function ifenroll(Request $request)
+    {
+        $user = User::find($request['user_id']);
+        if ($user->role == 'instructor')
+            return response()->json('please, sign in as student');
+        else {
+            foreach ($user->studcourse as $course) {
+                if ($course->course_id == $request['course_id'])
+                    return response(1);
+            }
+        }
+        return response(0);
+    }
     ///////////////////////////////////////////
-    public function enrolle(Request $request){
-        $studentHasCourses=User::find($request['student_id'])->studcourse;
-       foreach($studentHasCourses as $check){
-           if($check->course_id==$request['course_id'])
-           return response()->json(
-               'already enrolled in this course ,check your courses' );
-    
-       }
-        $course=Course::find($request['course_id']);
-        $stu_course= StudentCourse::create([
-                     'student_id'=>$request['student_id'],
-                     'course_id'=>$request['course_id'],
+    public function enrolle(Request $request)
+    {
+        $studentHasCourses = User::find($request['student_id'])->studcourse;
+        foreach ($studentHasCourses as $check) {
+            if ($check->course_id == $request['course_id'])
+                return response()->json(
+                    'already enrolled in this course, check your courses'
+                );
+        }
+        $course = Course::find($request['course_id']);
+        $stu_course = StudentCourse::create([
+            'student_id' => $request['student_id'],
+            'course_id' => $request['course_id'],
         ]);
-        
-        return response()->json('you have enrolled in '.$course->title. ' course ,check your courses' );
+
+        return response()->json('you have enrolled in ' . $course->title . ' course, check your courses');
     }
 }

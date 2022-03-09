@@ -51,6 +51,8 @@ Route::put('/students/{id}', [StudentController::class, 'update']);
 Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 Route::get('/courseofstu/{id}', [StudentController::class, 'coursestu']);
 Route::post('/enrolle', [StudentController::class, 'enrolle']);
+Route::post('/ifenrolle', [StudentController::class, 'ifenroll']);
+
 
 // Route::apiResource('students', StudentController::class);
 //});
