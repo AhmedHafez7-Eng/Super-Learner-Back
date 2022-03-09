@@ -5,6 +5,7 @@ namespace App\Http\Controllers\APIs;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\StudentCourse;
 
 class coursesController extends Controller
 {
@@ -38,6 +39,7 @@ class coursesController extends Controller
         if ($course) {
 
             $course->title =  $request->title;
+             $course->desc =  $request->desc;
             $course->save();
             return response()->json('your item has updated');
         }
@@ -48,5 +50,18 @@ class coursesController extends Controller
         $course = Course::find($id);
 
         return response($course);
+    }
+    public function delete($id){
+        $course=Course::find($id);
+        $itstitle=$course->title;
+        $hasstu=StudentCourse::where('course_id',$course->id)->get();
+        
+            if($hasstu->isEmpty())
+            
+            { $course->delete();
+             return response()->json($itstitle .'has deleted');}
+           else  return response()->json('sorry can not delete');
+            
+       
     }
 }

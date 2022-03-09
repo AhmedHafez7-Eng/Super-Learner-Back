@@ -171,4 +171,27 @@ class StudentController extends Controller
 
         return response()->json('you have enrolled in ' . $course->title . ' course, check your courses');
     }
+    public function delete($id){
+      $stu=User::find($id);
+      $hisname=$stu->fname;
+      $hascourse=StudentCourse::where('student_id',$stu->id)->get();
+      if($hascourse->isEmpty())
+      {$stu->delete();
+      return  response()->json($hisname .' has deleted');
+    }
+      else  return response()->json('sorry can not delete');
+    }
+    // public function unrolled($id){
+    //     $stu=User::find($id);
+    //     $hisname=$stu->fname;
+    //     $hascourse=StudentCourse::where('student_id',$stu->id)->get();
+    //     if($hascourse->isEmpty())
+    //     {$stu->delete();
+    //     return  response()->json($hisname .' has deleted');
+    //   }
+    //     else{ $hascourse->delete();
+    //         return  response()->json($hisname .' has unsubscribe ' );
+    //     }
+
+    //   }
 }
