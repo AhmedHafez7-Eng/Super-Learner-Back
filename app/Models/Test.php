@@ -15,8 +15,8 @@ class Test extends Model
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
-    // public function detailsOfTest()
-    // {
-    //     return $this->hasMany(TestDetails::class, 'test_id', 'id');
-    // }
+    public function detailsOfTest()
+    {
+        return $this->hasMany(TestDetails::class, 'test_id', 'id');
+    }
 }
