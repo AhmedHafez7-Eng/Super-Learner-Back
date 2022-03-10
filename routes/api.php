@@ -73,7 +73,7 @@ Route::get('/courses', [coursesController::class, 'listCourse']);
 Route::post('/uploadimg/{id}', [coursesController::class, 'saveimgcourse']);
 Route::post('/update/{id}', [coursesController::class, 'update']);
 Route::get('/course/{id}', [coursesController::class, 'getCourse']);
-
+Route::post('/add', [coursesController::class, 'addcourse']);
 
 /////////API Student Courses /////////////////////
 Route::get('/student-courses', [studentcourseController::class, 'index']);
@@ -107,7 +107,7 @@ Route::get('/ques/{test_id}', [TestsController::class, 'getdetails']);
 
 Route::get('/testsdetails', [TestDetailsController::class, 'index']);
 Route::get('/testsdetails/{id}', [TestDetailsController::class, 'show']);
-Route::post('/testsdetails', [TestDetailsController::class, 'store']);
+Route::post('/testsdetails', [TestDetailsController::class, 'addquiz']);
 Route::put('/testsdetails/{id}', [TestDetailsController::class, 'update']);
 Route::delete('/testsdetails/{id}', [TestDetailsController::class, 'delete']);
 
