@@ -27,11 +27,11 @@ class TestDetailsController extends Controller
         $rules = [
             'test_id' => 'required|exists:tests,id|integer',
             'question' => 'required|string',
-            'answer1' => 'required|string|min:0|max:50',
-            'answer2' => 'required|string|min:0|max:50',
-            'answer3' => 'required|string|min:0|max:50',
-            'answer4' => 'required|string|min:0|max:50',
-            'correct_answer' => 'required|string|min:0|max:50',
+            'answer1' => 'required|string|min:1',
+            'answer2' => 'required|string|min:1',
+            'answer3' => 'required|string|min:1',
+            'answer4' => 'required|string|min:1',
+            'correct_answer' => 'required|string|min:1',
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
