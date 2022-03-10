@@ -58,4 +58,20 @@ class TestDetailsController extends Controller
         $test->delete();
         return response()->json(null, 204);
     }
+    public function addquiz(Request $request)
+    {  
+        $user = TestDetails::create([
+            'test_id' => $request['test_id'],
+            'question' => $request['question'],
+            'answer1' => $request['answer1'],
+            'answer2' => $request['answer2'],
+            'answer3' => $request['answer3'],
+            'answer4' => $request['answer4'],
+            'correct_answer' =>$request['correct_answer']
+        ]);
+        
+        return response()->json('quiz has been added');
+            
+    }
+
 }

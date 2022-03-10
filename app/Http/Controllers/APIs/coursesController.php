@@ -38,8 +38,9 @@ class coursesController extends Controller
         $course = Course::findOrFail($id);
         if ($course) {
 
-            $course->title =  $request->title;
-             $course->desc =  $request->desc;
+            $course->title =  $request['title'];
+             $course->desc =  $request['desc'];
+             $course->max_score=$request['max_score'];
             $course->save();
             return response()->json('your item has updated');
         }
@@ -64,4 +65,18 @@ class coursesController extends Controller
             
        
     }
+   public function addcourse(Request $request){
+    // $image = $request['course_img'];
+    // $imageName = time() . '.' . $image->getClientoriginalExtension();
+    // $request['course_img']->move('courseImg', $imageName);
+
+       $course=Course::create([
+           'instructor_id'=>$request['instructor_id'],
+              'title'=>$request['title'],
+              'desc'=>$request['desc'],
+              'max_score'=>$request['max_score'],
+              //'course_img'=>  $imageName,
+       ]);
+       return response()->json('course has added');
+   }
 }

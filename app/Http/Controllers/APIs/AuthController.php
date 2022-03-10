@@ -28,7 +28,7 @@ class AuthController extends Controller
 
         // $image = $request->profile_pic;
         // $imageName = time() . '.' . $image->getClientoriginalExtension();
-        // $request->profile_pic->move('userImg', $imageName);
+        $request->profile_pic->move('userImg', $imageName);
 
         $user = User::create([
             'fname' => $validatedData['fname'],
@@ -39,7 +39,7 @@ class AuthController extends Controller
             'address' => $request['address'],
             'password' => Hash::make($validatedData['password']),
             'role' => $request['role'],
-            // 'profile_pic' => $imageName,
+             'profile_pic' => $imageName,
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
