@@ -37,10 +37,17 @@ class coursesController extends Controller
     {
         $course = Course::findOrFail($id);
         if ($course) {
+            if ($request['title']) {
+                $course->title =  $request['title'];
+            }
 
-            $course->title =  $request['title'];
-             $course->desc =  $request['desc'];
-             $course->max_score=$request['max_score'];
+            if ($request['desc']) {
+                $course->desc =  $request['desc'];
+            }
+
+            if ($request['max_score']) {
+                $course->max_score =  $request['max_score'];
+            }
             $course->save();
             return response()->json('your item has updated');
         }
@@ -63,18 +70,19 @@ class coursesController extends Controller
             return response()->json($itstitle . 'Has Been Deleted!');
         } else  return response()->json('Sorry, This Course can not be deleted for now because it has enrolling students!');
     }
-   public function addcourse(Request $request){
-    // $image = $request['course_img'];
-    // $imageName = time() . '.' . $image->getClientoriginalExtension();
-    // $request['course_img']->move('courseImg', $imageName);
+    public function addcourse(Request $request)
+    {
+        // $image = $request['course_img'];
+        // $imageName = time() . '.' . $image->getClientoriginalExtension();
+        // $request['course_img']->move('courseImg', $imageName);
 
-       $course=Course::create([
-           'instructor_id'=>$request['instructor_id'],
-              'title'=>$request['title'],
-              'desc'=>$request['desc'],
-              'max_score'=>$request['max_score'],
-              //'course_img'=>  $imageName,
-       ]);
-       return response()->json('course has added');
-   }
+        $course = Course::create([
+            'instructor_id' => $request['instructor_id'],
+            'title' => $request['title'],
+            'desc' => $request['desc'],
+            'max_score' => $request['max_score'],
+            //'course_img'=>  $imageName,
+        ]);
+        return response()->json('course has added');
+    }
 }
