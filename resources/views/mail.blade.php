@@ -9,9 +9,8 @@
 </head>
 
 <body>
-    <h1>
-        this is test mail
-    </h1>
+    <p>
+        you have enrolled successfully </p>
 </body>
 
 </html>
