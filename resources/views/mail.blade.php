@@ -9,8 +9,7 @@
 </head>
 
 <body>
-    <p>
-        you have enrolled successfully </p>
+    <p>Welcome To SmartEDU Platform, You've Registered Successfully!</p>
 </body>
 
 </html>

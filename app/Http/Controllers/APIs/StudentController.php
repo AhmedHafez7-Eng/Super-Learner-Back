@@ -158,6 +158,9 @@ class StudentController extends Controller
     ///////////////////////////////////////////
     public function enrolle(Request $request)
     {
+
+        $student = User::find($request['student_id']);
+
         $studentHasCourses = User::find($request['student_id'])->studcourse;
         foreach ($studentHasCourses as $check) {
             if ($check->course_id == $request['course_id'])
@@ -171,7 +174,7 @@ class StudentController extends Controller
             'course_id' => $request['course_id'],
         ]);
 
-        Mail::to($studentHasCourses->email)->send(new mailTrap());
+        // Mail::to($student->email)->send(new mailTrap());
         return response()->json('you have enrolled in ' . $course->title . ' course, check your courses');
     }
     public function delete($id)

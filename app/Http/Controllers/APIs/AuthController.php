@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\mailTrap;
 
 use App\Models\User;
 
@@ -42,6 +44,7 @@ class AuthController extends Controller
             //  'profile_pic' => $imageName,
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
+        Mail::to($validatedData['email'])->send(new mailTrap());
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
