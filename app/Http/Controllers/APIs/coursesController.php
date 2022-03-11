@@ -36,7 +36,7 @@ class coursesController extends Controller
     public function update(Request $request, $id)
     {
         $course = Course::findOrFail($id);
-        if ($course) {
+
             if ($request['title']) {
                 $course->title =  $request['title'];
             }
@@ -50,7 +50,6 @@ class coursesController extends Controller
             }
             $course->save();
             return response()->json('your item has updated');
-        }
     }
     /////////////////////////////////////////////////
     public function getCourse($id)
