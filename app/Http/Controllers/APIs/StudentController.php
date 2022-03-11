@@ -8,6 +8,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\mailTrap;
 
 use App\Models\User;
 use App\Models\Course;
@@ -169,6 +171,7 @@ class StudentController extends Controller
             'course_id' => $request['course_id'],
         ]);
 
+        Mail::to($studentHasCourses->email)->send(new mailTrap());
         return response()->json('you have enrolled in ' . $course->title . ' course, check your courses');
     }
     public function delete($id)
