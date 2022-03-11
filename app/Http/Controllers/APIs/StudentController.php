@@ -174,7 +174,7 @@ class StudentController extends Controller
             'course_id' => $request['course_id'],
         ]);
 
-        // Mail::to($student->email)->send(new mailTrap());
+        Mail::to($student->email)->send(new mailTrap());
         return response()->json('you have enrolled in ' . $course->title . ' course, check your courses');
     }
     public function delete($id)
