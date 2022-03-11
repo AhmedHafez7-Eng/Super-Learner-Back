@@ -22,3 +22,4 @@ Route::get('/', function () {
 });
 Route::get('mail', [StudentController::class, 'enrolle']);
 Route::post('pay', [FatoorahController::class, 'payOrder']);
+//Route::post('pay', [FatoorahController::class, 'payOrder']);

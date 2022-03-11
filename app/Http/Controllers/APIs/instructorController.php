@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\StudentCourse;
 use Auth;
 
 class instructorController extends Controller
@@ -59,6 +60,20 @@ class instructorController extends Controller
 
         $courses = $instructor->courseofinstructor;
         return response($courses);
+    }
+    public function destroy($id)
+    {
+        $instructor = User::find($id);
+        $hiscourses = $instructor->courseofinstructor;
+        $hisname = $instructor->fname;
+        foreach ($hiscourses as $course) {
+            $hasstu = StudentCourse::where('course_id', $course->id)->get();
+            if ($hasstu->isEmpty())
+                $course->delete();
+            else  return response()->json('Sorry, This Instructor can not be deleted for now because it has active courses!');
+        }
+        $instructor->delete();
+        return response()->json($hisname . 'Has Been Deleted');
     }
 }
 

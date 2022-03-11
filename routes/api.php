@@ -51,6 +51,8 @@ Route::put('/students/{id}', [StudentController::class, 'update']);
 Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 Route::get('/courseofstu/{id}', [StudentController::class, 'coursestu']);
 Route::post('/enrolle', [StudentController::class, 'enrolle']);
+Route::post('/ifenrolle', [StudentController::class, 'ifenroll']);
+
 
 // Route::apiResource('students', StudentController::class);
 //});
@@ -71,7 +73,7 @@ Route::get('/courses', [coursesController::class, 'listCourse']);
 Route::post('/uploadimg/{id}', [coursesController::class, 'saveimgcourse']);
 Route::post('/update/{id}', [coursesController::class, 'update']);
 Route::get('/course/{id}', [coursesController::class, 'getCourse']);
-
+Route::post('/add', [coursesController::class, 'addcourse']);
 
 /////////API Student Courses /////////////////////
 Route::get('/student-courses', [studentcourseController::class, 'index']);
@@ -92,7 +94,7 @@ Route::delete('/posts/{id}', [postsController::class, 'delete']);
 
 Route::get('/tests', [TestsController::class, 'index']);
 Route::get('/tests/{id}', [TestsController::class, 'show']);
-Route::post('/tests', [TestsController::class, 'store']);
+Route::post('/addTest', [TestsController::class, 'store']);
 Route::put('/tests/{id}', [TestsController::class, 'update']);
 Route::delete('/tests/{id}', [TestsController::class, 'delete']);
 /////////////////////////////////////////////////////
@@ -105,17 +107,22 @@ Route::get('/ques/{test_id}', [TestsController::class, 'getdetails']);
 
 Route::get('/testsdetails', [TestDetailsController::class, 'index']);
 Route::get('/testsdetails/{id}', [TestDetailsController::class, 'show']);
-Route::post('/testsdetails', [TestDetailsController::class, 'store']);
+Route::post('/testsdetails', [TestDetailsController::class, 'addquiz']);
 Route::put('/testsdetails/{id}', [TestDetailsController::class, 'update']);
 Route::delete('/testsdetails/{id}', [TestDetailsController::class, 'delete']);
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 /////////////////////////////  payment //////////////////////////////////
 
 Route::post('pay', [FatoorahController::class, 'payOrder']);
 // Route::get('pay', [FatoorahController::class, 'payOrder']);
 Route::get('call_back', [FatoorahController::class, 'callBack']);
+Route::get('error', [FatoorahController::class, 'callBack']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//////////////////////////////admin/////////////
+Route::get('/delete/instructor/{id}', [instructorController::class, 'destroy']);
+Route::get('/delete/course/{id}', [coursesController::class, 'delete']);
+Route::get('/delete/student/{id}', [StudentController::class, 'delete']);

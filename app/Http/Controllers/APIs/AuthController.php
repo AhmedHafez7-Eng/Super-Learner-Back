@@ -23,10 +23,6 @@ class AuthController extends Controller
             'address' => 'required|string|max:255',
             'b_date' => 'required| date',
             'role' => 'required',
-            // 'phone' => 'required|numeric|digits:11',
-            // 'address' => 'required|string|max:255',
-            // 'b_date' => 'required| date',
-            // 'role' => 'required',
             // 'profile_pic' => 'required|mimes:jpeg,png,jpg',
         ]);
 
@@ -42,9 +38,8 @@ class AuthController extends Controller
             'phone' => $request['phone'],
             'address' => $request['address'],
             'password' => Hash::make($validatedData['password']),
-            'role' => $validatedData['role'],
-            // 'role' => $request['role'],
-            // 'profile_pic' => $imageName,
+            'role' => $request['role'],
+            //  'profile_pic' => $imageName,
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([

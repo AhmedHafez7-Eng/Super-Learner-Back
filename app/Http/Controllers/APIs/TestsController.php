@@ -23,7 +23,8 @@ class TestsController extends Controller
         if (is_null($test)) {
             return response()->json(["message" => "test not found"], 404);
         }
-        return response()->json($test->load('CourseOfTest'), 200);
+        return response()->json($test, 200);
+        // return response()->json($test->load('CourseOfTest'), 200);
     }
     public function store(Request $request)
     {
