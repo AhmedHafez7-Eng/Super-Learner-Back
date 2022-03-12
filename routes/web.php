@@ -20,6 +20,7 @@ use App\Http\Controllers\mailController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('mail', [StudentController::class, 'enrolle']);
+// Route::get('mail', [StudentController::class, 'enrolle']);
+// Route::get('mail', [StudentController::class, 'enrolle']);
+
 Route::post('pay', [FatoorahController::class, 'payOrder']);
-//Route::post('pay', [FatoorahController::class, 'payOrder']);

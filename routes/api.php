@@ -25,8 +25,6 @@ use App\Models\Course;
 |
 */
 
-
-
 // ====================== Auth Routes  (For All Users)
 // ------ Public Routes
 
@@ -38,10 +36,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-
 // ====================== Student Routes
-// ------ Public Routes
+// Route::get('/students/edit/{id}', [StudentController::class, 'edit']);
 
+// ------ Public Routes
 
 // ------ Protected Routes
 //Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -53,10 +51,8 @@ Route::get('/courseofstu/{id}', [StudentController::class, 'coursestu']);
 Route::post('/enrolle', [StudentController::class, 'enrolle']);
 Route::post('/ifenrolle', [StudentController::class, 'ifenroll']);
 
-
 // Route::apiResource('students', StudentController::class);
 //});
-
 
 // ====================== Instructor Routes
 
@@ -87,8 +83,6 @@ Route::get('/posts/{id}', [postsController::class, 'show']);
 Route::post('/posts/{id}', [postsController::class, 'update']);
 Route::post('/posts', [postsController::class, 'store']);
 Route::delete('/posts/{id}', [postsController::class, 'delete']);
-
-
 
 // =========================================tests routes========================================================
 

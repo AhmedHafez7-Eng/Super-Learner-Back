@@ -30,11 +30,9 @@ class StudentController extends Controller
             $url = asset('userImg/' . $img);
             $student->profile_pic = $url;
         }
-        return response()->json(
-            [
-                'students' =>  $students,
-            ]
-        );  // in json format
+        return response()->json([
+            'students' => $students,
+        ]); // in json format
     }
 
     /**
@@ -59,7 +57,10 @@ class StudentController extends Controller
         $student = User::find($id);
 
         if (is_null($student)) {
-            return response()->json(['message' => 'No Student Found With This ID To Show'], 404);
+            return response()->json(
+                ['message' => 'No Student Found With This ID To Show'],
+                404
+            );
         }
         $img = $student->profile_pic;
         $url = asset('userImg/' . $img);
@@ -75,13 +76,20 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function edit($id)
+    // {
+    //     $student = User::find($id);
+    //     return response()->json($student);
+    // }
     public function update(Request $request, $id)
     {
-
         $student = User::find($id);
 
         if (is_null($student)) {
-            return response()->json(['message' => 'No Student Found With This ID To Update'], 404);
+            return response()->json(
+                ['message' => 'No Student Found With This ID To Update'],
+                404
+            );
         }
 
         //======= Handling Inputs Errors
@@ -107,7 +115,6 @@ class StudentController extends Controller
             $student->profile_pic = $url;
             return response()->json($student, 200);
         } catch (\Illuminate\Database\QueryException $e) {
-
             //======= Handling Duplicate Entry Error
             $errorCode = $e->errorInfo[1];
             if ($errorCode == '1062') {
@@ -126,7 +133,10 @@ class StudentController extends Controller
     {
         $student = User::find($id);
         if (is_null($student)) {
-            return response()->json(['message' => 'No Student Found With This ID To Delete'], 404);
+            return response()->json(
+                ['message' => 'No Student Found With This ID To Delete'],
+                404
+            );
         }
         $student->delete();
         return response()->json(null, 204);
@@ -134,23 +144,28 @@ class StudentController extends Controller
 
     public function coursestu($id)
     {
-        $student = StudentCourse::with('StudentInstance')->where('student_id', $id)->first();
-        $studentcourse = StudentCourse::with('CourseInstance')->where('student_id', $id)->get();
-        if ($student && $studentcourse)
-
+        $student = StudentCourse::with('StudentInstance')
+            ->where('student_id', $id)
+            ->first();
+        $studentcourse = StudentCourse::with('CourseInstance')
+            ->where('student_id', $id)
+            ->get();
+        if ($student && $studentcourse) {
             return response()->json($studentcourse, 200);
+        }
         return response()->json('error not found', 404);
     }
     ////////////////////////////////////////////////////////////////////
     public function ifenroll(Request $request)
     {
         $user = User::find($request['user_id']);
-        if ($user->role == 'instructor')
+        if ($user->role == 'instructor') {
             return response()->json('please, sign in as student');
-        else {
+        } else {
             foreach ($user->studcourse as $course) {
-                if ($course->course_id == $request['course_id'])
+                if ($course->course_id == $request['course_id']) {
                     return response(1);
+                }
             }
         }
         return response(0);
@@ -158,15 +173,15 @@ class StudentController extends Controller
     ///////////////////////////////////////////
     public function enrolle(Request $request)
     {
-
         $student = User::find($request['student_id']);
 
         $studentHasCourses = User::find($request['student_id'])->studcourse;
         foreach ($studentHasCourses as $check) {
-            if ($check->course_id == $request['course_id'])
+            if ($check->course_id == $request['course_id']) {
                 return response()->json(
                     'already enrolled in this course, check your courses'
                 );
+            }
         }
         $course = Course::find($request['course_id']);
         $stu_course = StudentCourse::create([
@@ -174,8 +189,12 @@ class StudentController extends Controller
             'course_id' => $request['course_id'],
         ]);
 
-        Mail::to($student->email)->send(new mailTrap());
-        return response()->json('you have enrolled in ' . $course->title . ' course, check your courses');
+        Mail::to($student->email)->send(new enroll());
+        return response()->json(
+            'you have enrolled in ' .
+                $course->title .
+                ' course, check your courses'
+        );
     }
     public function delete($id)
     {
@@ -184,8 +203,12 @@ class StudentController extends Controller
         $hascourse = StudentCourse::where('student_id', $stu->id)->get();
         if ($hascourse->isEmpty()) {
             $stu->delete();
-            return  response()->json($hisname . ' Has Been Deleted');
-        } else  return response()->json('Sorry, This Student can not be deleted for now because he is enrolling in courses!');
+            return response()->json($hisname . ' Has Been Deleted');
+        } else {
+            return response()->json(
+                'Sorry, This Student can not be deleted for now because he is enrolling in courses!'
+            );
+        }
     }
     // public function unrolled($id){
     //     $stu=User::find($id);
