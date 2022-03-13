@@ -45,7 +45,7 @@ Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 Route::get('/courseofstu/{id}', [StudentController::class, 'coursestu']);
 Route::post('/enrolle', [StudentController::class, 'enrolle']);
 Route::post('/ifenrolle', [StudentController::class, 'ifenroll']);
-
+Route::put('/feedback/{id}', [studentcourseController::class, 'feedback']);
 ///////////////////////////// Instructor Routes /////////////////////////////
 
 Route::get('/instructors', [instructorController::class, 'list']);
