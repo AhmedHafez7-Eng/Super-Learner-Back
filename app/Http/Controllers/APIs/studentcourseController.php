@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\StudentCourse;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+
 class studentcourseController extends Controller
 {
 
@@ -63,22 +64,21 @@ class studentcourseController extends Controller
             $studentcourse->delete();
         return response()->json('Error Record Not Found', 404);
     }
-    public function feedback($id,Request $request){
-        $student = StudentCourse::where([["student_id","=",$id],["course_id","=",$request->course_id]])->first();
-        
+    public function feedback($id, Request $request)
+    {
+        $student = StudentCourse::where([["student_id", "=", $id], ["course_id", "=", $request->course_id]])->first();
+
         if ($student) {
             $rules = [
                 'feedback' => 'string|min:3|max:150',
-                
+
             ];
             $validator = Validator::make($request->all(), $rules);
             $student->feedback = $request->feedback;
             $student->save();
-            return response()->json("Profile Info has been Updated Successfully!", 201);
-        }
-        else{
+            return response()->json("Your Feedback Sent Successfully!", 201);
+        } else {
             return response()->json("you are not enrolled in this course");
         }
-        
     }
 }
