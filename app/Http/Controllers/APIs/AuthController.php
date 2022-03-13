@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\mailTrap;
 
 use App\Models\User;
 
@@ -39,9 +41,10 @@ class AuthController extends Controller
             'address' => $request['address'],
             'password' => Hash::make($validatedData['password']),
             'role' => $request['role'],
-            // 'profile_pic' => $imageName,
+            //  'profile_pic' => $imageName,
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
+        Mail::to($validatedData['email'])->send(new mailTrap());
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
@@ -89,5 +92,63 @@ class AuthController extends Controller
         return [
             'message' => 'Logged Out'
         ];
+    }
+
+    // public function findUserData($id)
+    // {
+    //     $user = User::find($id);
+    //     return response()->json($user);
+    // }
+
+    //=========== Update User Data
+    public function edit_profile(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $validatedData = $request->validate([
+            'fname' => 'string|min:2|max:70',
+            'lname' => 'string|min:2|max:70',
+            'email' => 'string|email|max:255',
+            'password' => 'string|min:8',
+            'phone' => 'numeric|digits:11',
+            'address' => 'string|max:255',
+            // 'b_date' => ' date',
+            // 'profile_pic' => 'required|mimes:jpeg,png,jpg',
+        ]);
+
+
+        if ($validatedData) {
+
+            // $image = $request->usrImg;
+            // if ($image) {
+            //     $imageName = time() . '.' . $image->getClientoriginalExtension();
+            //     $request->usrImg->move('usersImages', $imageName);
+            //     $user->avatar_Img = $imageName;
+            // }
+            if ($request->fname) {
+                $user->fname = $request->fname;
+            }
+            if ($request->lname) {
+                $user->lname = $request->lname;
+            }
+            if ($request->email && $request->email !== $user->email) {
+                $user->email = $request->email;
+            }
+            if ($request->password) {
+                $user->password = Hash::make($request->password);
+            }
+            if ($request->phone) {
+                $user->phone = $request->phone;
+            }
+            if ($request->address) {
+                $user->address = $request->address;
+            }
+            // if ($request->b_date) {
+            //     $user->b_date = $request->b_date;
+            // }
+
+            $user->save();
+            return response()->json("Profile Info has been Updated Successfully!", 201);
+        }
     }
 }

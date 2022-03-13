@@ -27,11 +27,11 @@ class TestDetailsController extends Controller
         $rules = [
             'test_id' => 'required|exists:tests,id|integer',
             'question' => 'required|string',
-            'answer1' => 'required|string|min:0|max:50',
-            'answer2' => 'required|string|min:0|max:50',
-            'answer3' => 'required|string|min:0|max:50',
-            'answer4' => 'required|string|min:0|max:50',
-            'correct_answer' => 'required|string|min:0|max:50',
+            'answer1' => 'required|string|min:1',
+            'answer2' => 'required|string|min:1',
+            'answer3' => 'required|string|min:1',
+            'answer4' => 'required|string|min:1',
+            'correct_answer' => 'required|string|min:1',
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -58,4 +58,20 @@ class TestDetailsController extends Controller
         $test->delete();
         return response()->json(null, 204);
     }
+    public function addquiz(Request $request)
+    {  
+        $user = TestDetails::create([
+            'test_id' => $request['test_id'],
+            'question' => $request['question'],
+            'answer1' => $request['answer1'],
+            'answer2' => $request['answer2'],
+            'answer3' => $request['answer3'],
+            'answer4' => $request['answer4'],
+            'correct_answer' =>$request['correct_answer']
+        ]);
+        
+        return response()->json('quiz has been added');
+            
+    }
+
 }

@@ -36,13 +36,20 @@ class coursesController extends Controller
     public function update(Request $request, $id)
     {
         $course = Course::findOrFail($id);
-        if ($course) {
 
-            $course->title =  $request->title;
-             $course->desc =  $request->desc;
-            $course->save();
-            return response()->json('your item has updated');
+        if ($request['title']) {
+            $course->title =  $request['title'];
         }
+
+        if ($request['desc']) {
+            $course->desc =  $request['desc'];
+        }
+
+        if ($request['max_score']) {
+            $course->max_score =  $request['max_score'];
+        }
+        $course->save();
+        return response()->json('your item has updated');
     }
     /////////////////////////////////////////////////
     public function getCourse($id)
@@ -51,17 +58,30 @@ class coursesController extends Controller
 
         return response($course);
     }
-    public function delete($id){
-        $course=Course::find($id);
-        $itstitle=$course->title;
-        $hasstu=StudentCourse::where('course_id',$course->id)->get();
-        
-            if($hasstu->isEmpty())
-            
-            { $course->delete();
-             return response()->json($itstitle .'has deleted');}
-           else  return response()->json('sorry can not delete');
-            
-       
+    public function delete($id)
+    {
+        $course = Course::find($id);
+        $itstitle = $course->title;
+        $hasstu = StudentCourse::where('course_id', $course->id)->get();
+
+        if ($hasstu->isEmpty()) {
+            $course->delete();
+            return response()->json($itstitle . 'Has Been Deleted!');
+        } else  return response()->json('Sorry, This Course can not be deleted for now because it has enrolling students!');
+    }
+    public function addcourse(Request $request)
+    {
+        // $image = $request['course_img'];
+        // $imageName = time() . '.' . $image->getClientoriginalExtension();
+        // $request['course_img']->move('courseImg', $imageName);
+
+        $course = Course::create([
+            'instructor_id' => $request['instructor_id'],
+            'title' => $request['title'],
+            'desc' => $request['desc'],
+            'max_score' => $request['max_score'],
+            //'course_img'=>  $imageName,
+        ]);
+        return response()->json('course has been added');
     }
 }
