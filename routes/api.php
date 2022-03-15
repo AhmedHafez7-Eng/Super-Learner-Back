@@ -54,7 +54,8 @@ Route::get('/courseinfo/{id}', [instructorController::class, 'getone']);
 Route::get('/getimage/{id}', [instructorController::class, 'getimageof']);
 Route::get('/delete/{id}', [instructorController::class, 'delete']);
 
-Route::post('/uploadimg/{id}', [instructorController::class, 'saveimgcourse']);
+
+
 
 ///////////////////////////// Courses Routes /////////////////////////////
 //Route::post('/uploadimg/{id}', [instructorController::class, 'saveimgcourse']);
@@ -106,10 +107,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('pay', [FatoorahController::class, 'payOrder']);
 // Route::get('pay', [FatoorahController::class, 'payOrder']);
 Route::get('call_back', [FatoorahController::class, 'callBack']);
+Route::get('error', [FatoorahController::class, 'error']);
 
 
 //////////////////////////////admin/////////////
 Route::get('/delete/instructor/{id}', [instructorController::class, 'destroy']);
 Route::get('/delete/course/{id}', [coursesController::class, 'delete']);
 Route::get('/delete/student/{id}', [StudentController::class, 'delete']);
-Route::get('error', [FatoorahController::class, 'callBack']);
+
+
