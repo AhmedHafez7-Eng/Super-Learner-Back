@@ -21,11 +21,11 @@ class FatoorahController extends Controller
     public function payOrder(Request $request)
     {
         $data = [
-            "CustomerName" => $request['fname'],
+            "CustomerName" => "amr",
             "NotificationOption" => "Lnk",
             "MobileCountryCode" => "965",
-            "CustomerMobile" => $request['phone'],
-            "CustomerEmail" => $request['email'],
+            "CustomerMobile" => "01018970251",
+            "CustomerEmail" => "amr@amr.com",
             "InvoiceValue" => 100,
             "DisplayCurrencyIso" => "kwd",
             "CallBackUrl" => env("success_url"),
@@ -39,12 +39,13 @@ class FatoorahController extends Controller
 
     public function callBack(Request $request)
     {
-       dd($request);
-        $data = [];
-        $data['Key'] = $request->payementId;
-        $data['KeyType'] = 'paymentId';
-        
-        return  $paymentData = $this->fatoorahServices->getPaymentStatus($data);
+        return  response()->json("Payment Successfull");
+        // search where invoice id = $paymentData['Data]['InvoiceId];
+
+    }
+    public function error(Request $request)
+    {
+        return  response()->json("Payment failed");
         // search where invoice id = $paymentData['Data]['InvoiceId];
 
     }
