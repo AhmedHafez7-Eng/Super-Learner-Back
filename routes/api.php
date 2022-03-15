@@ -55,8 +55,6 @@ Route::get('/getimage/{id}', [instructorController::class, 'getimageof']);
 Route::get('/delete/{id}', [instructorController::class, 'delete']);
 
 
-
-
 ///////////////////////////// Courses Routes /////////////////////////////
 //Route::post('/uploadimg/{id}', [instructorController::class, 'saveimgcourse']);
 /////////////////////////////////////////////////////////////
@@ -114,5 +112,3 @@ Route::get('error', [FatoorahController::class, 'error']);
 Route::get('/delete/instructor/{id}', [instructorController::class, 'destroy']);
 Route::get('/delete/course/{id}', [coursesController::class, 'delete']);
 Route::get('/delete/student/{id}', [StudentController::class, 'delete']);
-
-
