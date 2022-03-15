@@ -21,11 +21,11 @@ class FatoorahController extends Controller
     public function payOrder(Request $request)
     {
         $data = [
-            "CustomerName" => "amr",
+            "CustomerName" => $request['fname'],
             "NotificationOption" => "Lnk",
             "MobileCountryCode" => "965",
-            "CustomerMobile" => "01018970251",
-            "CustomerEmail" => "amr@amr.com",
+            "CustomerMobile" => $request['phone'],
+            "CustomerEmail" => $request['email'],
             "InvoiceValue" => 100,
             "DisplayCurrencyIso" => "kwd",
             "CallBackUrl" => env("success_url"),
