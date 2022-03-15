@@ -45,9 +45,12 @@ class AuthController extends Controller
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
         Mail::to($validatedData['email'])->send(new mailTrap());
+        $inst = User::all()->last();
+        $id = $inst->id;
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
+            'id' => $id,
         ], 201);
     }
 
@@ -75,6 +78,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
+
         ], 201);
 
         // $resposne = [
