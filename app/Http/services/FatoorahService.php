@@ -57,7 +57,7 @@ class FatoorahService
     {
 
         return $response = $this->buildRequest('v2/SendPayment', 'POST', $data);
-//        if ($response)
+//       if ($response)
 //            $this->saveTransacionPayment($patient_id, $response['Data']['InvoiceId']);
 //
 
