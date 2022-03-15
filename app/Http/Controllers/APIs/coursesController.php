@@ -70,22 +70,38 @@ class coursesController extends Controller
             return response()->json($itstitle . 'Has Been Deleted!');
         } else  return response()->json('Sorry, This Course can not be deleted for now because it has enrolling students!');
     }
-   public function addcourse(Request $request){
-   // $image = $request->file(course_img)->storeOnCloudinary()->getSecurePath();
-    //   $i=$request; 
-    // $image = $request['course_img'];
-    // $imageName = time() . '.' . $image->getClientoriginalExtension();
-    // $request['course_img']->move('courseImg', $imageName);
+    // public function addcourse(Request $request)
+    // {
+    //     // $image = $request['course_img'];
+    //     // $imageName = time() . '.' . $image->getClientoriginalExtension();
+    //     // $request['course_img']->move('courseImg', $imageName);
 
-       $course=Course::create([
-           'instructor_id'=>$request['instructor_id'],
-              'title'=>$request['title'],
-              'desc'=>$request['desc'],
-              'max_score'=>$request['max_score'],
-             
-       ]);
-   $course=Course::all()->last();
-   $id=$course->id;
-       return response()->json(['id'=>$id,'message'=>'saved'], 201);
-   }
+    //     $course = Course::create([
+    //         'instructor_id' => $request['instructor_id'],
+    //         'title' => $request['title'],
+    //         'desc' => $request['desc'],
+    //         'max_score' => $request['max_score'],
+    //         //'course_img'=>  $imageName,
+    //     ]);
+    //     return response()->json('course has been added');
+    // }
+    public function addcourse(Request $request)
+    {
+        // $image = $request->file(course_img)->storeOnCloudinary()->getSecurePath();
+        //   $i=$request;
+        // $image = $request['course_img'];
+        // $imageName = time() . '.' . $image->getClientoriginalExtension();
+        // $request['course_img']->move('courseImg', $imageName);
+
+        $course = Course::create([
+            'instructor_id' => $request['instructor_id'],
+            'title' => $request['title'],
+            'desc' => $request['desc'],
+            'max_score' => $request['max_score'],
+
+        ]);
+        $course = Course::all()->last();
+        $id = $course->id;
+        return response()->json(['id' => $id, 'message' => 'saved'], 201);
+    }
 }
