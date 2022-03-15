@@ -39,7 +39,7 @@ class FatoorahController extends Controller
 
     public function callBack(Request $request)
     {
-        
+       dd($request);
         $data = [];
         $data['Key'] = $request->payementId;
         $data['KeyType'] = 'paymentId';
