@@ -110,4 +110,4 @@ Route::get('error', [FatoorahController::class, 'error']);
 Route::get('/delete/instructor/{id}', [instructorController::class, 'destroy']);
 Route::get('/delete/course/{id}', [coursesController::class, 'delete']);
 Route::get('/delete/student/{id}', [StudentController::class, 'delete']);
-Route::get('error', [FatoorahController::class, 'callBack']);
+
