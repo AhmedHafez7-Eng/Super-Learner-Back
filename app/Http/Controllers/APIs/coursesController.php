@@ -25,7 +25,7 @@ class coursesController extends Controller
     public function saveimgcourse(Request $request, $id)
     {
         $course = Course::find($id);
-         $image = $request->file('course_img')->storeOnCloudinary()->getSecurePath();
+        $image = $request->file('course_img')->storeOnCloudinary()->getSecurePath();
         //  $image = $request->course_img;
         //  $imageName = time() . '.' . $image->getClientoriginalExtension();
         // $request->course_img->move('courseImg', $imageName);
