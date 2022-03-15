@@ -13,22 +13,23 @@ class coursesController extends Controller
     public function listCourse()
     {
         $courses = Course::all();
-        foreach ($courses as $ss) {
-            $img = $ss->course_img;
-            $url = asset('courseImg/' . $img);
-            //array_push($urls,$url);
-            $ss->course_img = $url;
-        }
+        // foreach ($courses as $ss) {
+        //     $img = $ss->course_img;
+        //     $url = asset('courseImg/' . $img);
+        //     //array_push($urls,$url);
+        //     $ss->course_img = $url;
+        // }
         return response()->json($courses);
     }
     /////////////////////////////////////////////////
     public function saveimgcourse(Request $request, $id)
     {
         $course = Course::find($id);
-        $image = $request->course_img;
-        $imageName = time() . '.' . $image->getClientoriginalExtension();
-        $request->course_img->move('courseImg', $imageName);
-        $course->course_img = $imageName;
+         $image = $request->file('course_img')->storeOnCloudinary()->getSecurePath();
+        //  $image = $request->course_img;
+        //  $imageName = time() . '.' . $image->getClientoriginalExtension();
+        // $request->course_img->move('courseImg', $imageName);
+        $course->course_img = $image;
         $course->save();
         return response()->json('saved changes');
     }
@@ -69,19 +70,22 @@ class coursesController extends Controller
             return response()->json($itstitle . 'Has Been Deleted!');
         } else  return response()->json('Sorry, This Course can not be deleted for now because it has enrolling students!');
     }
-    public function addcourse(Request $request)
-    {
-        // $image = $request['course_img'];
-        // $imageName = time() . '.' . $image->getClientoriginalExtension();
-        // $request['course_img']->move('courseImg', $imageName);
+   public function addcourse(Request $request){
+   // $image = $request->file(course_img)->storeOnCloudinary()->getSecurePath();
+    //   $i=$request; 
+    // $image = $request['course_img'];
+    // $imageName = time() . '.' . $image->getClientoriginalExtension();
+    // $request['course_img']->move('courseImg', $imageName);
 
-        $course = Course::create([
-            'instructor_id' => $request['instructor_id'],
-            'title' => $request['title'],
-            'desc' => $request['desc'],
-            'max_score' => $request['max_score'],
-            //'course_img'=>  $imageName,
-        ]);
-        return response()->json('course has been added');
-    }
+       $course=Course::create([
+           'instructor_id'=>$request['instructor_id'],
+              'title'=>$request['title'],
+              'desc'=>$request['desc'],
+              'max_score'=>$request['max_score'],
+             
+       ]);
+   $course=Course::all()->last();
+   $id=$course->id;
+       return response()->json(['id'=>$id,'message'=>'saved'], 201);
+   }
 }
