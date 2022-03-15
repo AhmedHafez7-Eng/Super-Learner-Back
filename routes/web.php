@@ -1,6 +1,10 @@
 <?php
 use App\Http\Controllers\FatoorahController;
 use Illuminate\Support\Facades\Route;
+// use app\http\controllers\mailController;
+// use App\Http\Controllers\mailController;
+
+use App\Http\Controllers\mailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-//Route::post('pay', [FatoorahController::class, 'payOrder']);
+// Route::get('mail', [StudentController::class, 'enrolle']);
+// Route::get('mail', [StudentController::class, 'enrolle']);
+
+Route::post('pay', [FatoorahController::class, 'payOrder']);

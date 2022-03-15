@@ -25,7 +25,7 @@ class coursesController extends Controller
     public function saveimgcourse(Request $request, $id)
     {
         $course = Course::find($id);
-         $image = $request->file('course_img')->storeOnCloudinary()->getSecurePath();
+        $image = $request->file('course_img')->storeOnCloudinary()->getSecurePath();
         //  $image = $request->course_img;
         //  $imageName = time() . '.' . $image->getClientoriginalExtension();
         // $request->course_img->move('courseImg', $imageName);
@@ -37,14 +37,20 @@ class coursesController extends Controller
     public function update(Request $request, $id)
     {
         $course = Course::findOrFail($id);
-        if ($course) {
 
+        if ($request['title']) {
             $course->title =  $request['title'];
-             $course->desc =  $request['desc'];
-             $course->max_score=$request['max_score'];
-            $course->save();
-            return response()->json('your item has updated');
         }
+
+        if ($request['desc']) {
+            $course->desc =  $request['desc'];
+        }
+
+        if ($request['max_score']) {
+            $course->max_score =  $request['max_score'];
+        }
+        $course->save();
+        return response()->json('your item has updated');
     }
     /////////////////////////////////////////////////
     public function getCourse($id)
@@ -64,22 +70,38 @@ class coursesController extends Controller
             return response()->json($itstitle . 'Has Been Deleted!');
         } else  return response()->json('Sorry, This Course can not be deleted for now because it has enrolling students!');
     }
-   public function addcourse(Request $request){
-   // $image = $request->file(course_img)->storeOnCloudinary()->getSecurePath();
-    //   $i=$request; 
-    // $image = $request['course_img'];
-    // $imageName = time() . '.' . $image->getClientoriginalExtension();
-    // $request['course_img']->move('courseImg', $imageName);
+    // public function addcourse(Request $request)
+    // {
+    //     // $image = $request['course_img'];
+    //     // $imageName = time() . '.' . $image->getClientoriginalExtension();
+    //     // $request['course_img']->move('courseImg', $imageName);
 
-       $course=Course::create([
-           'instructor_id'=>$request['instructor_id'],
-              'title'=>$request['title'],
-              'desc'=>$request['desc'],
-              'max_score'=>$request['max_score'],
-             
-       ]);
-   $course=Course::all()->last();
-   $id=$course->id;
-       return response()->json(['id'=>$id,'message'=>'saved'], 201);
-   }
+    //     $course = Course::create([
+    //         'instructor_id' => $request['instructor_id'],
+    //         'title' => $request['title'],
+    //         'desc' => $request['desc'],
+    //         'max_score' => $request['max_score'],
+    //         //'course_img'=>  $imageName,
+    //     ]);
+    //     return response()->json('course has been added');
+    // }
+    public function addcourse(Request $request)
+    {
+        // $image = $request->file(course_img)->storeOnCloudinary()->getSecurePath();
+        //   $i=$request;
+        // $image = $request['course_img'];
+        // $imageName = time() . '.' . $image->getClientoriginalExtension();
+        // $request['course_img']->move('courseImg', $imageName);
+
+        $course = Course::create([
+            'instructor_id' => $request['instructor_id'],
+            'title' => $request['title'],
+            'desc' => $request['desc'],
+            'max_score' => $request['max_score'],
+
+        ]);
+        $course = Course::all()->last();
+        $id = $course->id;
+        return response()->json(['id' => $id, 'message' => 'saved'], 201);
+    }
 }
