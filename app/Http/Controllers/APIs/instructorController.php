@@ -19,13 +19,13 @@ class instructorController extends Controller
         //$user=auth()->user();
         //if ($user->tokenCan('all:list')) {
         $instructor = User::where('role', 'instructor')->get();
-        foreach ($instructor as $ss) {
-            $img = $ss->profile_pic;
-            $url = asset('userImg/' . $img);
-            //array_push($urls,$url);
-            $ss->profile_pic = $url;
-            $ss->courseofinstructor;
-        }
+        // foreach ($instructor as $ss) {
+        //     $img = $ss->profile_pic;
+        //     $url = asset('userImg/' . $img);
+        //     //array_push($urls,$url);
+        //     $ss->profile_pic = $url;
+        //     $ss->courseofinstructor;
+        // }
 
         return response()->json(
             [
@@ -43,20 +43,23 @@ class instructorController extends Controller
     public function saveimg(Request $request, $id)
     {
         $instructor = User::find($id);
-        $image = $request->profile_pic;
-        $imageName = time() . '.' . $image->getClientoriginalExtension();
-        $request->profile_pic->move('instructorImg', $imageName);
-        $instructor->profile_pic = $imageName;
+        // $image = $request->profile_pic;
+        // $imageName = time() . '.' . $image->getClientoriginalExtension();
+        // $request->profile_pic->move('instructorImg', $imageName);
+        $image = $request->file('course_img')->storeOnCloudinary()->getSecurePath();
+
+        $instructor->profile_pic = $image;
         $instructor->save();
         return response()->json('saved changes');
     }
+   
     ///////////////////////////////////////////////////
     public function  getone($id)
     {
         $instructor = User::find($id);
-        $img = $instructor->profile_pic;
-        $url = asset('userImg/' . $img);
-        $instructor->profile_pic = $url;
+        // $img = $instructor->profile_pic;
+        // $url = asset('userImg/' . $img);
+        // $instructor->profile_pic = $url;
 
         $courses = $instructor->courseofinstructor;
         return response($courses);
