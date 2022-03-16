@@ -6,7 +6,7 @@ use App\Http\services\FatoorahService;
 use Illuminate\Http\Request;
 
 class FatoorahController extends Controller
-{
+{public $status;
 
     /**
      * FatoorahController constructor.
@@ -38,15 +38,19 @@ class FatoorahController extends Controller
     }
 
     public function callBack(Request $request)
-    {
+    { $this->status=1;
         return  response()->json("Payment Successfull");
         // search where invoice id = $paymentData['Data]['InvoiceId];
 
     }
     public function error(Request $request)
-    {
+    {$this->status=0;
         return  response()->json("Payment failed");
         // search where invoice id = $paymentData['Data]['InvoiceId];
 
+    }
+    public function status(){
+    //    $s= $GLOBALS['status'];
+        return $this->status;
     }
 }

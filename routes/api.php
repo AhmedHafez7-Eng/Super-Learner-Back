@@ -107,6 +107,7 @@ Route::post('pay', [FatoorahController::class, 'payOrder']);
 // Route::get('pay', [FatoorahController::class, 'payOrder']);
 Route::get('call_back', [FatoorahController::class, 'callBack']);
 Route::get('error', [FatoorahController::class, 'error']);
+Route::get('status', [FatoorahController::class, 'status']);
 
 
 //////////////////////////////admin/////////////
