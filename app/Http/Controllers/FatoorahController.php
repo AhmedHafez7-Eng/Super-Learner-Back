@@ -45,7 +45,7 @@ class FatoorahController extends Controller
     }
     public function error(Request $request)
     {$this->status=0;
-        return  response()->json("Payment failed");
+        return redirect('https://ahmedhafez7-eng.github.io/Super-Learner-Front/course');
         // search where invoice id = $paymentData['Data]['InvoiceId];
 
     }
