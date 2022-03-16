@@ -38,7 +38,7 @@ class FatoorahController extends Controller
     }
 
     public function callBack(Request $request)
-    { dd($request);
+    { 
         return  response()->json("Payment Successfull");
         // search where invoice id = $paymentData['Data]['InvoiceId];
 
