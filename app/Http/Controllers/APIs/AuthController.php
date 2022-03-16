@@ -44,7 +44,7 @@ class AuthController extends Controller
             //  'profile_pic' => $imageName,
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
-        Mail::to($validatedData['email'])->send(new mailTrap());
+        // Mail::to($validatedData['email'])->send(new mailTrap());
         $inst = User::all()->last();
         $id = $inst->id;
         return response()->json([
