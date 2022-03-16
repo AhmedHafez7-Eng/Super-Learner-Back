@@ -107,10 +107,10 @@ Route::post('pay', [FatoorahController::class, 'payOrder']);
 // Route::get('pay', [FatoorahController::class, 'payOrder']);
 Route::get('call_back', [FatoorahController::class, 'callBack']);
 Route::get('error', [FatoorahController::class, 'error']);
+Route::get('status', [FatoorahController::class, 'status']);
 
 
 //////////////////////////////admin/////////////
 Route::get('/delete/instructor/{id}', [instructorController::class, 'destroy']);
 Route::get('/delete/course/{id}', [coursesController::class, 'delete']);
 Route::get('/delete/student/{id}', [StudentController::class, 'delete']);
-

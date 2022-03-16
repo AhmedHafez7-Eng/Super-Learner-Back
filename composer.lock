@@ -1095,6 +1095,7 @@
         },
         {
             "name": "laravel/framework",
+
             "version": "v8.83.5",
             "source": {
                 "type": "git",
@@ -1264,6 +1265,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+
             "time": "2022-03-15T13:37:44+00:00"
         },
         {
@@ -6082,6 +6084,7 @@
         },
         {
             "name": "laravel/sail",
+
             "version": "v1.13.7",
             "source": {
                 "type": "git",
@@ -6138,6 +6141,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
+
             "time": "2022-03-11T14:11:15+00:00"
         },
         {
@@ -7016,6 +7020,7 @@
         },
         {
             "name": "phpunit/phpunit",
+
             "version": "9.5.19",
             "source": {
                 "type": "git",
@@ -7103,6 +7108,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
+
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.19"
             },
             "funding": [
@@ -7115,6 +7121,7 @@
                     "type": "github"
                 }
             ],
+
             "time": "2022-03-15T09:57:31+00:00"
         },
         {
