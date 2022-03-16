@@ -55,7 +55,6 @@ Route::get('/getimage/{id}', [instructorController::class, 'getimageof']);
 Route::get('/delete/{id}', [instructorController::class, 'delete']);
 
 
-
 ///////////////////////////// Courses Routes /////////////////////////////
 //Route::post('/uploadimg/{id}', [instructorController::class, 'saveimgcourse']);
 /////////////////////////////////////////////////////////////
