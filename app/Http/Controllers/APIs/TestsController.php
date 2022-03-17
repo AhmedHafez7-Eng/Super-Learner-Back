@@ -29,7 +29,7 @@ class TestsController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'title' => 'required|min:3|max:10',
+            'title' => 'required|min:3|max:30',
             'max_score' => 'required|numeric',
             'course_id' => 'required|exists:courses,id',
         ];
