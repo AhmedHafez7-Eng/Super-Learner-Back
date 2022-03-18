@@ -27,9 +27,9 @@ class StudentController extends Controller
     {
         $students = User::where('role', 'student')->get();
         foreach ($students as $student) {
-            $img = $student->profile_pic;
-            $url = asset('userImg/' . $img);
-            $student->profile_pic = $url;
+            //$img = $student->profile_pic;
+            //$url = asset('userImg/' . $img);
+            //$student->profile_pic = $url;
         }
         return response()->json([
             'students' => $students,
@@ -63,9 +63,9 @@ class StudentController extends Controller
                 404
             );
         }
-        $img = $student->profile_pic;
-        $url = asset('userImg/' . $img);
-        $student->profile_pic = $url;
+        //$img = $student->profile_pic;
+        //$url = asset('userImg/' . $img);
+        //$student->profile_pic = $url;
 
         return response()->json($student, 200);
     }
@@ -111,9 +111,9 @@ class StudentController extends Controller
         try {
             $student->update($request->all());
 
-            $img = $student->profile_pic;
-            $url = asset('userImg/' . $img);
-            $student->profile_pic = $url;
+            //$img = $student->profile_pic;
+            //$url = asset('userImg/' . $img);
+            //$student->profile_pic = $url;
             return response()->json($student, 200);
         } catch (\Illuminate\Database\QueryException $e) {
             //======= Handling Duplicate Entry Error
