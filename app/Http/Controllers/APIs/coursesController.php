@@ -67,8 +67,10 @@ class coursesController extends Controller
 
         if ($hasstu->isEmpty()) {
             $course->delete();
-            return response()->json($itstitle . 'Has Been Deleted!');
-        } else  return response()->json('Sorry, This Course can not be deleted for now because it has enrolling students!');
+            return response()->json($itstitle . ' Has Been Deleted!');
+        } else {
+            return response()->json('Sorry, This Course can not be deleted for now because it has enrolling students!');
+        }
     }
     // public function addcourse(Request $request)
     // {
