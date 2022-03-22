@@ -190,12 +190,12 @@ class StudentController extends Controller
             'course_id' => $request['course_id'],
         ]);
 
-        Mail::to($student->email)->send(new enroll());
         return response()->json(
             'you have enrolled in ' .
                 $course->title .
                 ' course, check your courses'
         );
+        Mail::to($student->email)->send(new enroll());
     }
     public function delete($id)
     {
