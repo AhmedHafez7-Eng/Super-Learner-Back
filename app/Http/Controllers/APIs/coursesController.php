@@ -50,7 +50,7 @@ class coursesController extends Controller
             $course->max_score =  $request['max_score'];
         }
         $course->save();
-        return response()->json('your item has updated');
+        return response()->json('your course has updated');
     }
     /////////////////////////////////////////////////
     public function getCourse($id)

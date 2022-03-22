@@ -26,7 +26,7 @@ class TestDetailsController extends Controller
     {
         $rules = [
             'test_id' => 'required|exists:tests,id|integer',
-            'question' => 'required|string',
+            'question' => 'required|string|min:1',
             'answer1' => 'required|string|min:1',
             'answer2' => 'required|string|min:1',
             'answer3' => 'required|string|min:1',
@@ -59,7 +59,7 @@ class TestDetailsController extends Controller
         return response()->json(null, 204);
     }
     public function addquiz(Request $request)
-    {  
+    {
         $user = TestDetails::create([
             'test_id' => $request['test_id'],
             'question' => $request['question'],
@@ -67,11 +67,9 @@ class TestDetailsController extends Controller
             'answer2' => $request['answer2'],
             'answer3' => $request['answer3'],
             'answer4' => $request['answer4'],
-            'correct_answer' =>$request['correct_answer']
+            'correct_answer' => $request['correct_answer']
         ]);
-        
-        return response()->json('quiz has been added');
-            
-    }
 
+        return response()->json('quiz has been added');
+    }
 }
