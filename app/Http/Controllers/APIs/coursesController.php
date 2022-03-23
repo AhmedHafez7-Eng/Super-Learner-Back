@@ -12,7 +12,7 @@ class coursesController extends Controller
     //
     public function listCourse()
     {
-        $courses = Course::all();
+        $courses = Course::with('InstructorOfCourse')->get();
         // foreach ($courses as $ss) {
         //     $img = $ss->course_img;
         //     $url = asset('courseImg/' . $img);
